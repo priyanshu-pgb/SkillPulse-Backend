@@ -3289,11 +3289,8 @@ html.dark .criterion-pill {
 .gov-ministry-title {
   display: inline-block;
   font-size: 0.74rem;
-  color: #64748B;
-  margin-left: 0.5rem;
-  padding-left: 0.5rem;
-  border-left: 1px solid #CBD5E1;
-  font-weight: 500;
+  color: #002B49;
+  font-weight: 600;
 }
 
 .gov-top-controls {
@@ -3561,8 +3558,7 @@ html.dark .gov-flag-title {
 [data-theme="dark"] .gov-ministry-title,
 html.dark .gov-ministry-title {
   color: #94A3B8 !important;
-  border-left-color: #334155 !important;
-}
+  }
 
 [data-theme="dark"] .font-resizer-wrap,
 html.dark .font-resizer-wrap {
