@@ -1,0 +1,38 @@
+/* Watermark overlay */
+.watermark {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  font-size: 0.75rem;
+  color: var(--color-text-muted, rgba(0,0,0,0.4));
+  opacity: 0.45;
+  pointer-events: none;
+  z-index: 1000;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+[data-theme="dark"] .watermark,
+html.dark .watermark {
+  color: rgba(255, 255, 255, 0.25) !important;
+}
+
+/* Top‑right auth button */
+.auth-top {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+}
+.auth-top a {
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  transition: transform 0.2s ease;
+}
+.auth-top a:hover {
+  transform: translateY(-2px);
+}

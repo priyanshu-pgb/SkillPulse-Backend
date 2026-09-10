@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Fetches recent notifications and updates unread badge counter
   async function fetchNotifications() {
     try {
-      const res = await FieldAtlasAPI.get('/api/notifications/');
+      const res = await SkillPulseAPI.get('/api/notifications/');
       const unread = res.unread_count || 0;
 
       if (badge) {
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
       item.addEventListener('click', async function() {
         const notifId = this.getAttribute('data-id');
         try {
-          await FieldAtlasAPI.post(`/api/notifications/${notifId}/read/`);
+          await SkillPulseAPI.post(`/api/notifications/${notifId}/read/`);
           this.style.background = 'transparent';
           this.style.fontWeight = 'normal';
           fetchNotifications();
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
     markAllBtn.addEventListener('click', async function(e) {
       e.stopPropagation();
       try {
-        await FieldAtlasAPI.post('/api/notifications/read-all/');
+        await SkillPulseAPI.post('/api/notifications/read-all/');
         fetchNotifications();
       } catch (err) {}
     });

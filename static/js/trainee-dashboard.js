@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Fetches personalized dashboard details for the logged-in learner
   async function loadTraineeDashboard() {
     try {
-      const data = await FieldAtlasAPI.get('/api/trainee/me/dashboard/');
+      const data = await SkillPulseAPI.get('/api/trainee/me/dashboard/');
       currentDashboardData = data;
       renderTraineeInterface(data);
     } catch (err) {
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!container) return;
 
     try {
-      const enrollments = await FieldAtlasAPI.get('/api/trainee/me/enrollments/');
+      const enrollments = await SkillPulseAPI.get('/api/trainee/me/enrollments/');
       myEnrollmentsData = enrollments;
       renderMyEnrollments(enrollments);
     } catch (err) {
@@ -276,7 +276,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Fetch existing outcome if already submitted
     try {
-      const res = await FieldAtlasAPI.get(`/api/trainee/me/enrollments/${enrollmentId}/outcome/`);
+      const res = await SkillPulseAPI.get(`/api/trainee/me/enrollments/${enrollmentId}/outcome/`);
       if (res && res.id) {
         document.getElementById('outcome-employment-status').value = res.employment_status || 'employed';
         document.getElementById('outcome-employer').value = res.employer_name || '';
@@ -289,7 +289,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     } catch (err) {}
 
-    FieldAtlasAPI.openModal('modal-outcome-survey');
+    SkillPulseAPI.openModal('modal-outcome-survey');
   }
 
   // Submits the trainee outcome survey via POST
@@ -315,9 +315,9 @@ document.addEventListener('DOMContentLoaded', function() {
       };
 
       try {
-        await FieldAtlasAPI.post(`/api/trainee/me/enrollments/${enrollmentId}/outcome/`, payload);
-        FieldAtlasAPI.showToast('Outcome recorded successfully!', 'success');
-        FieldAtlasAPI.closeModal('modal-outcome-survey');
+        await SkillPulseAPI.post(`/api/trainee/me/enrollments/${enrollmentId}/outcome/`, payload);
+        SkillPulseAPI.showToast('Outcome recorded successfully!', 'success');
+        SkillPulseAPI.closeModal('modal-outcome-survey');
         loadMyEnrollments();
         loadTraineeDashboard();
       } catch (err) {} finally {
@@ -334,7 +334,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!container) return;
 
     try {
-      const apps = await FieldAtlasAPI.get('/api/trainee/me/applications/');
+      const apps = await SkillPulseAPI.get('/api/trainee/me/applications/');
       myApplicationsData = apps;
       if (badge) badge.textContent = apps.length;
       renderMyApplications(apps);
@@ -403,7 +403,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (searchVal) params.search = searchVal;
       if (catVal) params.category = catVal;
 
-      const courses = await FieldAtlasAPI.get('/api/trainee/courses/', params);
+      const courses = await SkillPulseAPI.get('/api/trainee/courses/', params);
       renderBrowseCourses(courses);
     } catch (err) {
       grid.innerHTML = '<div style="color: var(--color-coral); padding: 1rem; grid-column: 1/-1;">Failed to load course catalog.</div>';
@@ -494,7 +494,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('apply-course-id').value = courseId;
     document.getElementById('apply-modal-course-title').textContent = courseTitle;
     document.getElementById('apply-motivation').value = '';
-    FieldAtlasAPI.openModal('modal-apply-course');
+    SkillPulseAPI.openModal('modal-apply-course');
   }
 
   // Submits learner course application via POST
@@ -510,9 +510,9 @@ document.addEventListener('DOMContentLoaded', function() {
       submitBtn.innerHTML = 'Submitting...';
 
       try {
-        await FieldAtlasAPI.post(`/api/trainee/courses/${courseId}/apply/`, { motivation: motivation });
-        FieldAtlasAPI.showToast('Application submitted successfully! The trainer has been notified.', 'success');
-        FieldAtlasAPI.closeModal('modal-apply-course');
+        await SkillPulseAPI.post(`/api/trainee/courses/${courseId}/apply/`, { motivation: motivation });
+        SkillPulseAPI.showToast('Application submitted successfully! The trainer has been notified.', 'success');
+        SkillPulseAPI.closeModal('modal-apply-course');
         await loadMyApplications();
         await loadBrowseCourses();
       } catch (err) {} finally {
@@ -527,10 +527,10 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('performance-modal-course-title').textContent = courseTitle;
     const content = document.getElementById('performance-modal-content');
     content.innerHTML = '<div style="text-align: center; padding: 2rem; color: var(--color-text-muted);">Loading course outcomes metrics...</div>';
-    FieldAtlasAPI.openModal('modal-course-performance');
+    SkillPulseAPI.openModal('modal-course-performance');
 
     try {
-      const data = await FieldAtlasAPI.get(`/api/courses/${courseId}/performance/`);
+      const data = await SkillPulseAPI.get(`/api/courses/${courseId}/performance/`);
 
       let wageBlock = '';
       if (data.privacy_threshold_met && data.average_monthly_wage) {
@@ -579,16 +579,16 @@ document.addEventListener('DOMContentLoaded', function() {
   // Submits the learner's self-reported check-in status
   async function respondToCheckIn(responseChoice) {
     if (!currentDashboardData || !currentDashboardData.upcoming_follow_up) {
-      FieldAtlasAPI.showToast('No active check-in pending.', 'warning');
+      SkillPulseAPI.showToast('No active check-in pending.', 'warning');
       return;
     }
 
     const followUpId = currentDashboardData.upcoming_follow_up.id;
     try {
-      const res = await FieldAtlasAPI.post(`/api/trainee/me/follow-ups/${followUpId}/respond/`, {
+      const res = await SkillPulseAPI.post(`/api/trainee/me/follow-ups/${followUpId}/respond/`, {
         response_choice: responseChoice
       });
-      FieldAtlasAPI.showToast(res.message || 'Check-in response saved successfully!', 'success');
+      SkillPulseAPI.showToast(res.message || 'Check-in response saved successfully!', 'success');
       loadTraineeDashboard();
     } catch (err) {}
   }
@@ -605,10 +605,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (confirm(confirmMsg)) {
       try {
-        const res = await FieldAtlasAPI.post('/api/trainee/me/consent/', {
+        const res = await SkillPulseAPI.post('/api/trainee/me/consent/', {
           status: nextStatus
         });
-        FieldAtlasAPI.showToast(res.message, 'success');
+        SkillPulseAPI.showToast(res.message, 'success');
         loadTraineeDashboard();
       } catch (err) {}
     }
@@ -617,7 +617,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Generates and downloads the learner progress summary document
   async function downloadProgressReport() {
     try {
-      const res = await FieldAtlasAPI.get('/api/trainee/me/progress-report/');
+      const res = await SkillPulseAPI.get('/api/trainee/me/progress-report/');
       const rep = res.report;
 
       // Generate formatted printable HTML report window

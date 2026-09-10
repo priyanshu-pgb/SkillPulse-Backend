@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>{% block title %}SkillPulse — Skilling Outcomes Platform{% endblock %}</title>
   
-  <!-- Modern Typography: Plus Jakarta Sans -->
+  <!-- Modern Typography: Outfit & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
   
   <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -17,20 +17,72 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <!-- Core Application Stylesheets -->
-  <link rel="stylesheet" href="/static/css/field-atlas.css">
-  <link rel="stylesheet" href="/static/css/responsive.css">
+  <link rel="stylesheet" href="/static/css/field-atlas.css?v=2.6.0">
+  <link rel="stylesheet" href="/static/css/responsive.css?v=2.6.0">
 
   {% block extra_css %}{% endblock %}
 </head>
 <body>
+  <!-- ═══════════════ OFFICIAL GOVERNMENT OF INDIA UTILITY STRIP ═══════════════ -->
+  <div class="gov-tricolor-strip"></div>
+  <div class="gov-top-bar">
+    <div class="gov-flag-title">
+      <span class="gov-flag-icon" aria-hidden="true">🇮🇳</span>
+      <span>भारत सरकार | Government of India</span>
+      <span class="gov-ministry-title">कौशल विकास और उद्यमशीलता मंत्रालय | Ministry of Skill Development and Entrepreneurship</span>
+    </div>
+    <div class="gov-top-controls">
+      <!-- Accessibility Text Resizer -->
+      <div class="font-resizer-wrap" title="Accessibility Text Sizing">
+        <button type="button" class="font-resizer-btn" data-action="decrease" title="Decrease Font Size" aria-label="Decrease text size">A-</button>
+        <button type="button" class="font-resizer-btn active" data-action="normal" title="Normal Font Size" aria-label="Normal text size">A</button>
+        <button type="button" class="font-resizer-btn" data-action="increase" title="Increase Font Size" aria-label="Increase text size">A+</button>
+      </div>
+      <!-- Language Selector Dropdown -->
+      <div class="lang-selector-wrap" style="margin: 0;">
+        <select class="lang-select" aria-label="Choose Language" style="border: 1px solid var(--color-border); background: var(--color-surface); padding: 0.2rem 1.6rem 0.2rem 0.6rem; font-size: 0.76rem; border-radius: 4px; color: var(--color-text-primary);">
+          <option value="en">English</option>
+          <option value="hi">हिन्दी (Hindi)</option>
+          <option value="or">ଓଡ଼ିଆ (Odia)</option>
+          <option value="mr">मराठी (Marathi)</option>
+          <option value="bn">বাংলা (Bengali)</option>
+          <option value="ta">தமிழ் (Tamil)</option>
+          <option value="te">తెలుగు (Telugu)</option>
+        </select>
+      </div>
+      <!-- Theme Toggle -->
+      <button type="button" class="theme-toggle-btn" aria-label="Toggle Theme" title="Toggle Theme" style="padding: 0.25rem 0.6rem; font-size: 0.76rem; border-radius: 4px; background: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-text-primary);">
+        <span class="theme-icon">☀️</span>
+        <span class="theme-text">Light</span>
+      </button>
+    </div>
+  </div>
+
   {% block content %}{% endblock %}
+
+  <!-- ═══════════════ OFFICIAL GOVERNMENT FOOTER (GIGW COMPLIANT) ═══════════════ -->
+  <footer class="gov-footer">
+    <div class="gov-footer-links">
+      <a href="https://www.india.gov.in" target="_blank" rel="noopener">National Portal of India (india.gov.in)</a>
+      <a href="https://www.msde.gov.in" target="_blank" rel="noopener">Ministry of Skill Development & Entrepreneurship</a>
+      <a href="https://www.skillindiadigital.gov.in/home" target="_blank" rel="noopener">Skill India Digital Hub</a>
+      <a href="https://ncvet.gov.in" target="_blank" rel="noopener">NCVET</a>
+      <a href="https://nsdcindia.org" target="_blank" rel="noopener">NSDC</a>
+      <a href="https://digitalindia.gov.in" target="_blank" rel="noopener">Digital India</a>
+    </div>
+    <div class="gov-footer-disclaimer">
+      <p style="margin-bottom: 0.4rem; font-weight: 700; color: #CBD5E1;">कौशल विकास और उद्यमशीलता मंत्रालय | Ministry of Skill Development and Entrepreneurship (MSDE), Government of India</p>
+      <p style="margin: 0; font-size: 0.72rem; color: #94A3B8;">SkillPulse — Skilling Outcomes & Employment Analytics Portal. Designed and maintained in accordance with Guidelines for Indian Government Websites (GIGW) & Digital Personal Data Protection Act.</p>
+    </div>
+  </footer>
 
   <!-- Universal Toast Alerts Container -->
   <div id="toast-container"></div>
 
   <!-- Core JavaScript Libraries -->
-  <script src="/static/js/api.js"></script>
-  <script src="/static/js/i18n.js"></script>
+  <script src="/static/js/config.js?v=2.6.0"></script>
+  <script src="/static/js/api.js?v=2.6.0"></script>
+  <script src="/static/js/i18n.js?v=2.6.0"></script>
   <script src="/static/js/notifications.js"></script>
   <script>
     // Initialize Lucide icons on page load

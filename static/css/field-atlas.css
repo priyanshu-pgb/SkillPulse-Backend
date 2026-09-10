@@ -5,32 +5,32 @@
  */
 
 :root {
-  /* Brand Color Palette */
-  --color-deep-indigo: #1E2749;
-  --color-teal: #0E8176;
-  --color-teal-light: #E0F2F1;
-  --color-indigo-blue: #49618B;
-  --color-ochre: #D69541;
-  --color-ochre-light: #FEF3E2;
-  --color-coral: #D56F58;
-  --color-coral-light: #FDECE9;
+  /* Skill India Digital Hub (SIDH) Official Brand Color Palette */
+  --color-deep-indigo: #002B49; /* SIDH Primary Government Navy */
+  --color-teal: #0D7E55;        /* Government Emerald Green */
+  --color-teal-light: #E6F4EA;  /* Soft Emerald Tint */
+  --color-indigo-blue: #0A3D62; /* Auxiliary Navy Blue */
+  --color-ochre: #F26A21;       /* Skill India Official Saffron / Orange */
+  --color-ochre-light: #FFF4ED; /* Saffron Soft Tint */
+  --color-coral: #E11D48;       /* Crimson / Coral Alert */
+  --color-coral-light: #FFE4E6;
   
   /* Neutral & Surface Palette */
-  --color-parchment: #F8F9FA;
-  --color-surface: #FFFFFF;
-  --color-surface-hover: #F1F5F9;
-  --color-border: #E2E8F0;
+  --color-parchment: #F4F6F9;   /* Government Portal Slate-Grey Backdrop */
+  --color-surface: #FFFFFF;     /* Pure White Card Surface */
+  --color-surface-hover: #F8FAFC;
+  --color-border: #E2E8F0;      /* Crisp Card Border */
   --color-border-subtle: #EDF2F7;
-  --color-text-primary: #1E2749;
-  --color-text-secondary: #49618B;
+  --color-text-primary: #002B49; /* High-contrast Navy Text */
+  --color-text-secondary: #334155;
   --color-text-muted: #64748B;
   --color-text-inverse: #FFFFFF;
 
   /* Status Tokens */
-  --status-verified: #0E8176;
-  --status-pending: #D69541;
-  --status-disputed: #D56F58;
-  --status-active: #0E8176;
+  --status-verified: #0D7E55;
+  --status-pending: #F26A21;
+  --status-disputed: #E11D48;
+  --status-active: #0D7E55;
   --status-withdrawn: #64748B;
 
   /* Typography */
@@ -39,27 +39,27 @@
 
   /* Spatial & Elevation Tokens */
   --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
   --radius-full: 9999px;
-  --shadow-sm: 0 1px 2px 0 rgba(30, 39, 73, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(30, 39, 73, 0.07), 0 2px 4px -2px rgba(30, 39, 73, 0.05);
-  --shadow-lg: 0 10px 15px -3px rgba(30, 39, 73, 0.08), 0 4px 6px -4px rgba(30, 39, 73, 0.04);
-  --shadow-popover: 0 20px 25px -5px rgba(30, 39, 73, 0.1), 0 8px 10px -6px rgba(30, 39, 73, 0.05);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 43, 73, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 43, 73, 0.07), 0 2px 4px -2px rgba(0, 43, 73, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 43, 73, 0.08), 0 4px 6px -4px rgba(0, 43, 73, 0.04);
+  --shadow-popover: 0 20px 25px -5px rgba(0, 43, 73, 0.1), 0 8px 10px -6px rgba(0, 43, 73, 0.05);
 
   /* Layout Dimensions */
   --sidebar-width: 260px;
   --header-height: 64px;
   --bottom-nav-height: 60px;
 
-  /* Sidebar Tokens (Light Mode: Deep Navy Shell) */
-  --sidebar-bg: #1A2238;
-  --sidebar-border: rgba(255, 255, 255, 0.08);
+  /* Sidebar Tokens (Skill India Deep Navy Shell) */
+  --sidebar-bg: #002B49;
+  --sidebar-border: rgba(255, 255, 255, 0.12);
 
-  /* Glassmorphism tokens (Light Mode) */
-  --glass-bg: rgba(255, 255, 255, 0.88);
-  --glass-border: rgba(226, 232, 240, 0.8);
-  --glass-shadow: 0 8px 32px 0 rgba(14, 129, 118, 0.06);
+  /* Glassmorphism tokens */
+  --glass-bg: rgba(255, 255, 255, 0.95);
+  --glass-border: rgba(226, 232, 240, 0.9);
+  --glass-shadow: 0 4px 20px 0 rgba(0, 43, 73, 0.06);
 }
 
 /* Dark Mode Theme Tokens */
@@ -3236,4 +3236,359 @@ html.dark .criterion-pill {
   vertical-align: middle;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(14, 129, 118, 0.3);
+}
+
+
+/* ═════════════════════════════════════════════════════════════════════
+   OFFICIAL SKILL INDIA DIGITAL HUB (SIDH) GOVERNMENT DESIGN SYSTEM
+   Aligning with https://www.skillindiadigital.gov.in/home & GIGW
+   ═════════════════════════════════════════════════════════════════════ */
+
+/* Indian National Tricolor Utility Stripe */
+.gov-tricolor-strip {
+  height: 4px;
+  width: 100%;
+  background: linear-gradient(90deg, #FF9933 0%, #FF9933 33.33%, #FFFFFF 33.33%, #FFFFFF 66.66%, #138808 66.66%, #138808 100%);
+  display: block;
+  position: relative;
+  z-index: 1000;
+}
+
+/* Government Top Utility Bar */
+.gov-top-bar {
+  background-color: #F8FAFC;
+  border-bottom: 1px solid #E2E8F0;
+  padding: 0.35rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: #334155;
+  position: relative;
+  z-index: 999;
+  font-family: var(--font-sans);
+}
+
+.gov-flag-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  color: #002B49;
+  letter-spacing: -0.01em;
+}
+
+.gov-flag-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+.gov-ministry-title {
+  display: inline-block;
+  font-size: 0.74rem;
+  color: #64748B;
+  margin-left: 0.5rem;
+  padding-left: 0.5rem;
+  border-left: 1px solid #CBD5E1;
+  font-weight: 500;
+}
+
+.gov-top-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Accessibility Font Sizing Controls */
+.font-resizer-wrap {
+  display: inline-flex;
+  align-items: center;
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  border-radius: 4px;
+  padding: 1px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+
+.font-resizer-btn {
+  background: transparent;
+  border: none;
+  padding: 0.15rem 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #002B49;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.15s ease;
+  line-height: 1.2;
+}
+
+.font-resizer-btn:hover,
+.font-resizer-btn.active {
+  background: #002B49;
+  color: #FFFFFF;
+}
+
+/* Ashoka Lion Capital State Emblem of India */
+.ashoka-emblem-svg {
+  height: 44px;
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.08));
+}
+
+.ashoka-emblem-svg text {
+  fill: #002B49;
+}
+
+/* Skill India Digital Hub Brand Header Elements */
+.sidh-brand-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+
+.sidh-brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidh-brand-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #002B49;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.sidh-tagline {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #F26A21; /* Saffron */
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+
+.sidh-sub-org {
+  font-size: 0.68rem;
+  color: #64748B;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+/* Official Government Card Accents (Skill India Style) */
+.sidh-card-accent-saffron,
+.course-catalog-card:nth-child(3n+1) {
+  border-top: 4px solid #F26A21 !important;
+}
+
+.sidh-card-accent-navy,
+.course-catalog-card:nth-child(3n+2) {
+  border-top: 4px solid #002B49 !important;
+}
+
+.sidh-card-accent-green,
+.course-catalog-card:nth-child(3n+3) {
+  border-top: 4px solid #0D7E55 !important;
+}
+
+.sidh-card-accent-tricolor {
+  border-top: 4px solid transparent !important;
+  position: relative;
+}
+
+.sidh-card-accent-tricolor::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #FF9933 0%, #FF9933 33.33%, #FFFFFF 33.33%, #FFFFFF 66.66%, #138808 66.66%, #138808 100%);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+/* SIDH Badges */
+.badge-saffron,
+.sidh-badge-saffron {
+  background-color: #FFF4ED !important;
+  color: #D85814 !important;
+  border: 1px solid #FFD8C2 !important;
+  font-weight: 700 !important;
+}
+
+.badge-navy,
+.sidh-badge-navy {
+  background-color: #EBF3F8 !important;
+  color: #002B49 !important;
+  border: 1px solid #BFD8E8 !important;
+  font-weight: 700 !important;
+}
+
+.badge-gov-green,
+.sidh-badge-green {
+  background-color: #E6F4EA !important;
+  color: #0D7E55 !important;
+  border: 1px solid #A8DAB5 !important;
+  font-weight: 700 !important;
+}
+
+/* Official Skill India Saffron Primary Buttons */
+.btn-primary,
+.btn-sidh-primary {
+  background: #F26A21 !important;
+  color: #FFFFFF !important;
+  border: 1px solid #D85814 !important;
+  box-shadow: 0 2px 4px rgba(242, 106, 33, 0.25) !important;
+  font-weight: 600 !important;
+  border-radius: 6px !important;
+  transition: all 0.2s ease !important;
+}
+
+.btn-primary:hover,
+.btn-sidh-primary:hover {
+  background: #D85814 !important;
+  box-shadow: 0 3px 8px rgba(242, 106, 33, 0.35) !important;
+  transform: translateY(-1px);
+}
+
+.btn-sidh-navy {
+  background: #002B49 !important;
+  color: #FFFFFF !important;
+  border: 1px solid #001B2E !important;
+  box-shadow: 0 2px 4px rgba(0, 43, 73, 0.2) !important;
+  font-weight: 600 !important;
+  border-radius: 6px !important;
+}
+
+.btn-sidh-navy:hover {
+  background: #001F35 !important;
+  box-shadow: 0 3px 8px rgba(0, 43, 73, 0.3) !important;
+  transform: translateY(-1px);
+}
+
+/* Sidebar Government Active State */
+.sidebar {
+  background: #002B49 !important;
+}
+
+.sidebar .nav-link.active {
+  background: #073B63 !important;
+  color: #FFFFFF !important;
+  border-left: 4px solid #F26A21 !important;
+  font-weight: 700 !important;
+}
+
+.sidebar .nav-link.active i {
+  color: #F26A21 !important;
+}
+
+.sidebar .nav-group-label {
+  color: #94A3B8 !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+}
+
+/* Official Government Footer */
+.gov-footer {
+  margin-top: 3.5rem;
+  padding: 2.5rem 1.5rem 1.5rem;
+  background: #002B49;
+  color: #E2E8F0;
+  border-top: 4px solid transparent;
+  position: relative;
+}
+
+.gov-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #FF9933 0%, #FF9933 33.33%, #FFFFFF 33.33%, #FFFFFF 66.66%, #138808 66.66%, #138808 100%);
+}
+
+.gov-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.85rem;
+}
+
+.gov-footer-links a {
+  color: #CBD5E1;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s ease;
+}
+
+.gov-footer-links a:hover {
+  color: #F26A21;
+  text-decoration: underline;
+}
+
+.gov-footer-disclaimer {
+  text-align: center;
+  font-size: 0.75rem;
+  color: #94A3B8;
+  max-width: 820px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Dark Mode Harmonization */
+[data-theme="dark"] .gov-top-bar,
+html.dark .gov-top-bar {
+  background-color: #0A192F !important;
+  border-bottom-color: #1E293B !important;
+  color: #CBD5E1 !important;
+}
+
+[data-theme="dark"] .gov-flag-title,
+html.dark .gov-flag-title {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .gov-ministry-title,
+html.dark .gov-ministry-title {
+  color: #94A3B8 !important;
+  border-left-color: #334155 !important;
+}
+
+[data-theme="dark"] .font-resizer-wrap,
+html.dark .font-resizer-wrap {
+  background: #1E293B !important;
+  border-color: #334155 !important;
+}
+
+[data-theme="dark"] .font-resizer-btn,
+html.dark .font-resizer-btn {
+  color: #CBD5E1 !important;
+}
+
+[data-theme="dark"] .font-resizer-btn:hover,
+[data-theme="dark"] .font-resizer-btn.active,
+html.dark .font-resizer-btn:hover,
+html.dark .font-resizer-btn.active {
+  background: #F26A21 !important;
+  color: #FFFFFF !important;
+}
+
+[data-theme="dark"] .ashoka-emblem-svg text,
+html.dark .ashoka-emblem-svg text {
+  fill: #F8FAFC !important;
+}
+
+[data-theme="dark"] .sidh-brand-title,
+html.dark .sidh-brand-title {
+  color: #F8FAFC !important;
 }

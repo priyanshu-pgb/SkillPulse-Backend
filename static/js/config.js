@@ -185,9 +185,51 @@ window.FIELD_ATLAS_CONFIG = (function() {
   };
 })();
 
+
+// ─── Government Accessibility Font Resizer (A- / A / A+) ────────────────────────
+window.SkillPulseFontResizer = (function() {
+  'use strict';
+  const SIZES = { 'decrease': '90%', 'normal': '100%', 'increase': '112.5%' };
+
+  function setSize(level) {
+    const scale = SIZES[level] || '100%';
+    document.documentElement.style.fontSize = scale;
+    try {
+      localStorage.setItem('sidh_font_size', level);
+    } catch (e) {}
+    document.querySelectorAll('.font-resizer-btn').forEach(b => {
+      b.classList.toggle('active', b.getAttribute('data-action') === level);
+    });
+  }
+
+  function init() {
+    let saved = 'normal';
+    try {
+      saved = localStorage.getItem('sidh_font_size') || 'normal';
+    } catch (e) {}
+    if (saved !== 'normal') {
+      setSize(saved);
+    }
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.font-resizer-btn');
+      if (btn) {
+        e.preventDefault();
+        const action = btn.getAttribute('data-action');
+        if (action) setSize(action);
+      }
+    });
+  }
+
+  return {
+    setSize: setSize,
+    init: init
+  };
+})();
+
 // Automatically bind theme toggle on DOM ready
 document.addEventListener('DOMContentLoaded', function() {
   window.SkillPulseTheme.init();
+  window.SkillPulseFontResizer.init();
 });
 
 window.FIELD_ATLAS_CONFIG = window.SKILLPULSE_CONFIG || window.FIELD_ATLAS_CONFIG || {};

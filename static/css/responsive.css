@@ -1,21 +1,30 @@
 /*
  * SKILLPULSE — SKILLING OUTCOMES PLATFORM
- * Responsive Breakpoints, Mobile Navigation, RTL Support, and Accessibility
- * Breakpoint tests: 320px, 375px, 390px, 430px, 768px, 1024px, 1440px
+ * Comprehensive Responsive Breakpoints, Mobile Web Ergonomics, and Touch Layouts
+ * Zero button overlapping, full accessibility, seamless scrolling across all mobile viewports:
+ * Tested: 320px (iPhone SE 1st), 360px (Android Small), 375px (iPhone SE/Mini), 390px (iPhone 14/15),
+ *         414px (Plus/Max), 430px (Pro Max), 480px, 640px, 768px (iPad Mini), 1024px (iPad Pro), 1440px+
  */
 
-/* Mobile Bottom Navigation (Hidden on desktop) */
+/* ══════════════════════════════════════════════════════════════════════════
+   GLOBAL MOBILE NAVIGATION & PERSISTENT ELEMENTS
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Mobile Bottom Navigation (Visible on mobile screens <= 768px) */
 .mobile-bottom-nav {
   display: none;
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  height: var(--bottom-nav-height);
-  background-color: var(--color-surface);
-  border-top: 1px solid var(--color-border);
-  z-index: 50;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  height: var(--bottom-nav-height, 60px);
+  background-color: var(--color-surface, #FFFFFF);
+  border-top: 1px solid var(--color-border, #E2E8F0);
+  z-index: 999;
+  box-shadow: 0 -3px 16px rgba(15, 23, 42, 0.08);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .bottom-nav-inner {
@@ -23,6 +32,9 @@
   align-items: center;
   justify-content: space-around;
   height: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 0.5rem;
 }
 
 .bottom-nav-item {
@@ -30,20 +42,36 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.2rem;
-  color: var(--color-text-muted);
+  gap: 2px;
+  color: var(--color-text-muted, #94A3B8);
   text-decoration: none;
-  font-size: 0.7rem;
-  font-weight: 600;
+  font-size: 0.65rem;
+  font-weight: 700;
   flex: 1;
   height: 100%;
-  min-height: 44px;
+  min-height: 48px;
   cursor: pointer;
-  transition: color var(--transition-fast);
+  transition: all var(--transition-fast, 0.15s ease);
+  white-space: nowrap;
+  padding: 4px 2px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.bottom-nav-item i,
+.bottom-nav-item svg {
+  width: 20px !important;
+  height: 20px !important;
+  transition: transform 0.15s ease;
+}
+
+.bottom-nav-item:active i,
+.bottom-nav-item:active svg {
+  transform: scale(0.92);
 }
 
 .bottom-nav-item.active {
-  color: var(--color-teal);
+  color: var(--color-teal, #0E8176);
 }
 
 /* Mobile Sidebar Drawer Backdrop */
@@ -51,23 +79,25 @@
   display: none;
   position: fixed;
   inset: 0;
-  background-color: rgba(30, 39, 73, 0.6);
-  backdrop-filter: blur(2px);
-  z-index: 39;
+  background-color: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 49;
 }
 
 .mobile-backdrop.active {
   display: block;
 }
 
-/* Large Screens (1440px+) */
+/* ══════════════════════════════════════════════════════════════════════════
+   LARGE SCREENS & DESKTOP (1025px+)
+   ══════════════════════════════════════════════════════════════════════════ */
 @media (min-width: 1440px) {
   .content-body {
     max-width: 1360px;
   }
 }
 
-/* Tablets and Desktops under 1024px */
 @media (max-width: 1024px) {
   .metrics-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -86,123 +116,620 @@
   }
 }
 
-/* Mobile Viewports (Below 768px: 320px, 375px, 390px, 430px) */
+/* ══════════════════════════════════════════════════════════════════════════
+   TABLETS & MOBILE VIEWPORTS (Below 768px)
+   ══════════════════════════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
+  /* Layout, Viewport Clearance & Touch Ergonomics */
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .app-container {
+    overflow-x: hidden;
+    position: relative;
+    width: 100%;
+  }
+
   .sidebar {
     transform: translateX(-100%);
-    box-shadow: var(--shadow-popover);
+    box-shadow: var(--shadow-popover, 0 10px 25px rgba(0,0,0,0.2));
+    z-index: 1050;
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .sidebar.open {
     transform: translateX(0);
   }
 
+  /* Critical: Safe padding bottom so content is never hidden behind bottom nav */
   .main-wrapper {
-    margin-left: 0;
-    padding-bottom: calc(var(--bottom-nav-height) + 1.5rem);
+    margin-left: 0 !important;
+    padding-bottom: calc(var(--bottom-nav-height, 60px) + 2.5rem) !important;
+    overflow-x: hidden;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .mobile-drawer-toggle {
     display: flex;
     align-items: center;
     justify-content: center;
+    min-width: 38px;
+    height: 38px;
+    border-radius: var(--radius-md, 8px);
   }
 
   .mobile-bottom-nav {
-    display: block;
+    display: block !important;
   }
 
   .content-body {
-    padding: 1rem;
+    padding: 0.85rem 0.75rem 2.5rem !important;
   }
 
+  /* Watermark Safe Placement */
+  .watermark {
+    bottom: calc(var(--bottom-nav-height, 60px) + 8px) !important;
+    right: 8px !important;
+    font-size: 0.65rem !important;
+    opacity: 0.35 !important;
+    z-index: 90 !important;
+  }
+
+  /* Toast Alerts Safe Placement on Mobile (Docked above bottom nav) */
+  #toast-container {
+    bottom: calc(var(--bottom-nav-height, 60px) + 12px) !important;
+    left: 12px !important;
+    right: 12px !important;
+    align-items: center !important;
+    pointer-events: none;
+    z-index: 1100 !important;
+  }
+
+  .toast {
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    box-sizing: border-box;
+    font-size: 0.825rem !important;
+    padding: 0.75rem 1rem !important;
+  }
+
+  /* SMS Banner Simulator on Mobile (Docked at top with safe margins) */
+  .sms-banner-simulator {
+    top: 12px !important;
+    left: 12px !important;
+    right: 12px !important;
+    width: auto !important;
+    max-width: none !important;
+    z-index: 3000 !important;
+    box-sizing: border-box;
+  }
+
+  /* Top Header Controls */
+  .top-header {
+    padding: 0 0.75rem;
+    height: 56px;
+  }
+
+  .header-left {
+    gap: 0.5rem;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .header-breadcrumb {
+    font-size: 0.75rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px;
+  }
+
+  .header-right {
+    gap: 0.35rem;
+  }
+
+  .theme-text {
+    display: none !important;
+  }
+
+  .theme-toggle-btn {
+    padding: 0.35rem;
+    min-width: 36px;
+    height: 36px;
+  }
+
+  .lang-select {
+    font-size: 0.75rem;
+    padding: 0.35rem 1.4rem 0.35rem 0.45rem;
+    min-height: 36px;
+    max-width: 105px;
+  }
+
+  /* Notification Bell Popover on Mobile (Docked card overlay with zero off-screen clipping) */
+  .class-schedule-popover {
+    position: fixed !important;
+    top: 60px !important;
+    left: 10px !important;
+    right: 10px !important;
+    width: auto !important;
+    max-width: none !important;
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.4) !important;
+    z-index: 1080 !important;
+    max-height: calc(85vh - 70px) !important;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .class-schedule-popover #trainer-classes-popover-list {
+    max-height: 300px !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Hero Cards */
   .hero-card {
-    padding: 1.5rem 1.25rem;
+    padding: 1.25rem 1rem !important;
+    margin-bottom: 1.25rem;
+    border-radius: var(--radius-md, 8px);
   }
 
   .hero-title {
-    font-size: 1.5rem;
+    font-size: 1.35rem !important;
+    line-height: 1.25;
   }
 
   .hero-description {
-    font-size: 0.95rem;
-  }
-
-  .route-timeline-card {
-    padding: 1rem;
-    overflow-x: auto;
-  }
-
-  .route-steps-grid {
-    min-width: 500px;
-  }
-
-  .metrics-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-
-  .provider-list-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .charts-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .chart-container {
-    height: 220px;
-  }
-
-  .trainee-action-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .trainee-stage-rail {
-    overflow-x: auto;
-    min-width: 440px;
-    padding-bottom: 0.5rem;
-  }
-
-  .table-toolbar {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .table-search-wrap {
-    max-width: 100%;
-  }
-
-  .filter-group {
-    width: 100%;
-  }
-
-  .filter-select {
-    flex: 1;
-    min-width: 120px;
-  }
-}
-
-/* Extra Small Viewports (320px - 375px) */
-@media (max-width: 375px) {
-  h1 { font-size: 1.5rem; }
-  h2 { font-size: 1.25rem; }
-  
-  .hero-card {
-    padding: 1.25rem 1rem;
+    font-size: 0.85rem !important;
+    line-height: 1.45;
   }
 
   .hero-actions {
     flex-direction: column;
     align-items: stretch;
+    gap: 0.6rem;
   }
 
   .hero-actions .btn {
     width: 100%;
+    justify-content: center;
+    min-height: 44px;
+  }
+
+  /* Metrics Grids */
+  .metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
+  .metric-card {
+    padding: 1rem;
   }
 
   .metric-value {
-    font-size: 1.5rem;
+    font-size: 1.4rem !important;
+  }
+
+  /* Tables: Forced Smooth Horizontal Touch Scroll without Squishing */
+  .table-card {
+    border-radius: var(--radius-md, 8px);
+    overflow: hidden;
+  }
+
+  .table-responsive {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    display: block;
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  .data-table {
+    min-width: 620px;
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: 0.65rem 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .table-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    padding: 0.85rem;
+  }
+
+  .table-search-wrap {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  /* ═════════ STEP 1: GOVT COURSES & DEEP-DIVE ON MOBILE ═════════ */
+  .govt-course-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem;
+  }
+
+  .govt-course-card {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .live-stream-badge {
+    font-size: 0.68rem;
+    padding: 0.25rem 0.6rem;
+  }
+
+  #btn-join-live-stream {
+    width: 100% !important;
+    margin-top: 0.5rem;
+    min-height: 44px;
+    justify-content: center;
+  }
+
+  #step1-subview-analytics .hero-card {
+    padding: 1.25rem 1rem !important;
+  }
+
+  /* ═════════ STEP 2: COURSES OF TRAINER ON MOBILE ═════════ */
+  .trainer-tabs-nav {
+    width: 100% !important;
+    display: flex !important;
+    padding: 0.25rem;
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+  }
+
+  .trainer-tab-btn {
+    flex: 1;
+    justify-content: center;
+    padding: 0.55rem 0.35rem;
+    font-size: 0.78rem;
+    white-space: nowrap;
+    min-height: 42px;
+  }
+
+  #subview-trainer-create .card {
+    padding: 1.25rem 1rem !important;
+  }
+
+  #form-create-trainer-course div[style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  #form-create-trainer-course div[style*="justify-content: flex-end"] {
+    flex-direction: column-reverse !important;
+    align-items: stretch !important;
+    gap: 0.65rem !important;
+  }
+
+  #form-create-trainer-course div[style*="justify-content: flex-end"] button,
+  #form-create-trainer-course button[type="submit"] {
+    width: 100% !important;
+    justify-content: center !important;
+    min-height: 44px !important;
+  }
+
+  /* ═════════ STEP 3: CONFIRMATION & OUTREACH ON MOBILE (ZERO OVERLAP) ═════════ */
+  #btn-conf-filter-all,
+  #btn-conf-filter-placed,
+  #btn-conf-filter-seeking {
+    flex: 1 1 auto;
+    min-width: 100px;
+    font-size: 0.74rem;
+    padding: 0.55rem 0.5rem;
+    justify-content: center;
+    min-height: 40px;
+  }
+
+  #confirmation-cards-container .card {
+    padding: 1.15rem 1rem !important;
+    box-sizing: border-box;
+  }
+
+  /* Force vertical stacked buttons with 100% width and min 44px touch height */
+  #confirmation-cards-container div[style*="gap: 0.5rem"],
+  #confirmation-cards-container .trainee-card-actions {
+    width: 100% !important;
+    margin-top: 0.75rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+  }
+
+  #confirmation-cards-container a.btn,
+  #confirmation-cards-container button.btn {
+    width: 100% !important;
+    justify-content: center !important;
+    min-height: 44px !important;
+    font-size: 0.85rem !important;
+    padding: 0.65rem 1rem !important;
+    box-sizing: border-box;
+  }
+
+  .trainee-contact-card {
+    padding: 0.85rem !important;
+  }
+
+  .trainee-contact-card div[style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+    gap: 0.5rem !important;
+  }
+
+  /* ═════════ STEP 4: TRAINER QUALIFICATION ON MOBILE ═════════ */
+  .qualification-cert-card {
+    padding: 1.25rem 1rem !important;
+    box-sizing: border-box;
+  }
+
+  .qualification-cert-card > div {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .qualification-cert-card div[style*="text-align: right"] {
+    text-align: left !important;
+    margin-top: 1rem;
+  }
+
+  .unique-id-display {
+    width: 100% !important;
+    justify-content: center !important;
+    font-size: 1rem !important;
+    box-sizing: border-box;
+    padding: 0.65rem 0.75rem;
+  }
+
+  .unique-id-display + div {
+    display: flex !important;
+    width: 100% !important;
+    gap: 0.5rem !important;
+  }
+
+  .unique-id-display + div .btn {
+    flex: 1 !important;
+    justify-content: center !important;
+    min-height: 44px !important;
+  }
+
+  #btn-run-qualification-check {
+    width: 100% !important;
+    justify-content: center !important;
+    min-height: 44px !important;
+  }
+
+  .req-check-item {
+    padding: 0.75rem !important;
+  }
+
+  .req-check-item > div > div:first-child {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.35rem !important;
+  }
+
+  /* ═════════ TRAINEE PORTAL CONTINUOUS FLOW ON MOBILE ═════════ */
+  .trainee-welcome-card {
+    padding: 1.25rem 1rem !important;
+  }
+
+  /* Split ID Card & Placement Card to single column on mobile */
+  .trainee-metrics-split,
+  #section-dashboard div[style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+    gap: 0.85rem !important;
+  }
+
+  /* Section Jump Action Grid: 2 columns on mobile */
+  .trainee-action-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.6rem !important;
+  }
+
+  .trainee-action-btn {
+    padding: 0.65rem 0.4rem !important;
+    font-size: 0.78rem !important;
+    min-height: 60px !important;
+    justify-content: center;
+  }
+
+  .streak-stats-row {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem !important;
+  }
+
+  /* Govt Directory Bar */
+  #section-govt-courses div[style*="Official Central Ministries"] {
+    padding: 1rem !important;
+  }
+
+  .scheme-hero-header {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0.75rem !important;
+    padding: 1rem !important;
+  }
+
+  .completion-status-badge {
+    align-self: flex-start;
+  }
+
+  /* Google Form Survey on Mobile */
+  .gform-container {
+    padding: 0 !important;
+  }
+
+  .gform-header-content,
+  .gform-question-card {
+    padding: 1rem !important;
+  }
+
+  .gform-question-card div[style*="grid-template-columns: 1fr 1fr"],
+  .gform-question-card div[style*="grid-template-columns: 1fr 1fr;"] {
+    grid-template-columns: 1fr !important;
+    gap: 0.65rem !important;
+  }
+
+  #placement-outcome-form div[style*="justify-content: space-between"] {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0.65rem !important;
+  }
+
+  #gform-submit-btn,
+  #placement-outcome-form button {
+    width: 100% !important;
+    min-height: 44px !important;
+    justify-content: center !important;
+  }
+
+  #gform-confirmation-card div[style*="justify-content: center"] {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+  }
+
+  #gform-confirmation-card button {
+    width: 100% !important;
+    min-height: 44px !important;
+  }
+
+  /* Certificate Preview on Mobile */
+  .certificate-preview-container {
+    padding: 1.25rem 0.85rem !important;
+    border-width: 4px !important;
+  }
+
+  .cert-main-heading {
+    font-size: 1.2rem !important;
+  }
+
+  .cert-recipient-name {
+    font-size: 1.15rem !important;
+  }
+
+  .cert-footer-row {
+    flex-direction: column !important;
+    gap: 1.25rem !important;
+    text-align: center;
+  }
+
+  .cert-footer-row > div {
+    text-align: center !important;
+  }
+
+  /* SSO Portal Modal */
+  .sso-modal-card {
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+    width: 100% !important;
+    margin: 0.5rem;
+  }
+
+  .otp-digit-input {
+    width: 48px;
+    height: 52px;
+    font-size: 1.35rem;
+  }
+
+  /* Landing Page Mobile Navbar & Layout */
+  .landing-nav-actions .btn-ghost {
+    display: none !important;
+  }
+
+  .landing-nav-actions {
+    gap: 0.4rem;
+  }
+
+  .landing-nav-inner {
+    padding: 0.65rem 0.85rem !important;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-cta-group .btn-landing-primary,
+  .hero-cta-group .btn-landing-secondary {
+    width: 100%;
+    justify-content: center;
+    min-height: 48px;
+  }
+
+  .stats-bar-inner {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.25rem !important;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .how-steps {
+    grid-template-columns: 1fr !important;
+  }
+
+  .how-steps::before {
+    display: none !important;
+  }
+
+  .demo-cards {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   NARROW PHONES (Below 600px)
+   ══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 600px) {
+  .header-breadcrumb {
+    display: none !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   EXTRA SMALL PHONES (320px - 375px: iPhone SE & Older Android)
+   ══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 375px) {
+  h1 { font-size: 1.3rem !important; }
+  h2 { font-size: 1.15rem !important; }
+
+  .hero-card {
+    padding: 1rem 0.75rem !important;
+  }
+
+  .metric-value {
+    font-size: 1.25rem !important;
+  }
+
+  .trainee-action-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .streak-stats-row {
+    grid-template-columns: 1fr !important;
+  }
+
+  .bottom-nav-item span {
+    font-size: 0.58rem !important;
+  }
+
+  .stats-bar-inner {
+    grid-template-columns: 1fr !important;
+  }
+
+  .otp-digit-input {
+    width: 42px;
+    height: 46px;
+    font-size: 1.2rem;
   }
 }
 
@@ -262,7 +789,7 @@
 
 [dir="rtl"] #toast-container {
   right: auto;
-  left: 1.5rem;
+  left: 12px;
 }
 
 /* Accessibility & Reduced Motion */

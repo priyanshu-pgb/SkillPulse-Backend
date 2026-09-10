@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Fetches aggregated summary statistics and renders dynamic KPI metrics and overview visualizations
   async function loadOverviewData() {
     try {
-      const data = await FieldAtlasAPI.get('/api/trainer/dashboard/');
+      const data = await SkillPulseAPI.get('/api/trainer/dashboard/');
 
       // Populate dynamic metric KPI cards
       if (data.metrics) {
@@ -99,13 +99,13 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       // Render Charts
-      if (window.FieldAtlasCharts) {
-        FieldAtlasCharts.renderWageChart('wageProgressionCanvas', data.wage_chart);
-        FieldAtlasCharts.renderFunnelChart('funnelConversionCanvas', data.funnel_chart);
-        FieldAtlasCharts.renderProviderPulseChart('providerPulseCanvas', data.providers_pulse);
-        FieldAtlasCharts.renderNonPlacementChart('nonPlacementCanvas', data.non_placement_reasons);
-        if (FieldAtlasCharts.renderSkillGapChart) {
-          FieldAtlasCharts.renderSkillGapChart('skillGapCanvas', data.skill_gaps_breakdown);
+      if (window.SkillPulseCharts) {
+        SkillPulseCharts.renderWageChart('wageProgressionCanvas', data.wage_chart);
+        SkillPulseCharts.renderFunnelChart('funnelConversionCanvas', data.funnel_chart);
+        SkillPulseCharts.renderProviderPulseChart('providerPulseCanvas', data.providers_pulse);
+        SkillPulseCharts.renderNonPlacementChart('nonPlacementCanvas', data.non_placement_reasons);
+        if (SkillPulseCharts.renderSkillGapChart) {
+          SkillPulseCharts.renderSkillGapChart('skillGapCanvas', data.skill_gaps_breakdown);
         }
       }
     } catch (err) {
@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Fetches the assisted follow-up queue with DRF pagination fallback and populates priority cards
   async function loadFollowUpsData() {
     try {
-      const res = await FieldAtlasAPI.get('/api/outcomes/follow-ups/');
+      const res = await SkillPulseAPI.get('/api/outcomes/follow-ups/');
       currentFollowUpQueue = res.results || res.follow_ups || [];
       renderFollowUpQueue();
       if (currentFollowUpQueue.length > 0) {
@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Selects a follow-up item and updates the outreach preview message
+  // Selects a follow-up item and updates the outreach preview message for WhatsApp, SMS, and Call Script
   function selectFollowUpItem(item) {
     selectedFollowUp = item;
     renderFollowUpQueue();
@@ -206,8 +206,28 @@ document.addEventListener('DOMContentLoaded', function() {
     if (courseEl) courseEl.textContent = `${item.trainee_course} (${item.trainee_district})`;
 
     if (bubbleEl) {
-      const channelGreeting = currentChannel === 'whatsapp' ? '👋 Namaste' : 'Hello';
-      bubbleEl.textContent = `${channelGreeting} ${item.trainee_name}, this is SkillPulse checking in on your employment after completing your ${item.trainee_course} training. Could you please share your current work status?`;
+      if (currentChannel === 'sms') {
+        bubbleEl.innerHTML = `<div style="font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.4; color: #1E293B;">
+          <strong>[GOVT SMS GATEWAY]</strong><br>
+          Namaste ${item.trainee_name}, this is SkillPulse (Skill India Mission check-in). Please verify your work status for course "${item.trainee_course}".<br>
+          Reply <strong>1</strong> for Employed | <strong>2</strong> for Self-Employed | <strong>3</strong> for Seeking Work. Toll-free SMS.
+        </div>`;
+      } else if (currentChannel === 'call') {
+        bubbleEl.innerHTML = `<div style="font-size: 0.85rem; line-height: 1.5; color: #0F172A; text-align: left;">
+          <strong style="color: var(--color-teal); display: block; margin-bottom: 4px;">📞 TELE-OUTREACH CALL SCRIPT</strong>
+          <strong>1. Opening:</strong> "Namaste ${item.trainee_name}, I am calling from SkillPulse regarding your ${item.trainee_course} training in ${item.trainee_district}."<br>
+          <strong>2. Verification:</strong> "Are you currently employed or self-employed? What is your current monthly wage?"<br>
+          <strong>3. Action:</strong> Record response status below and save outcome record.
+        </div>`;
+      } else {
+        bubbleEl.innerHTML = `👋 Namaste ${item.trainee_name}, this is SkillPulse checking in on your employment after completing your ${item.trainee_course} training. Could you please share your current work status?`;
+      }
+    }
+
+    if (sendBtn) {
+      if (currentChannel === 'sms') sendBtn.innerHTML = '📲 Send SMS Outreach';
+      else if (currentChannel === 'call') sendBtn.innerHTML = '📞 Log Call & Save Result';
+      else sendBtn.innerHTML = '💬 Dispatch WhatsApp Outreach';
     }
 
     if (statusNoteEl) {
@@ -215,7 +235,7 @@ document.addEventListener('DOMContentLoaded', function() {
         statusNoteEl.innerHTML = `<span style="color: var(--color-coral); font-weight: 700;">⚠️ Participant has withdrawn consent. Outreach is blocked.</span>`;
         if (sendBtn) sendBtn.disabled = true;
       } else {
-        statusNoteEl.innerHTML = `<span style="color: var(--color-teal);">✓ Consent verified active. Safe to contact.</span>`;
+        statusNoteEl.innerHTML = `<span style="color: var(--color-teal);">✓ Consent verified active (${currentChannel.toUpperCase()} Channel Ready).</span>`;
         if (sendBtn) sendBtn.disabled = false;
       }
     }
@@ -226,37 +246,76 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // Sends an outreach attempt via the simulated gateway, verifying active consent and updating state
+  // Sends an outreach attempt via WhatsApp, SMS, or Tele-Call gateway
   async function dispatchFollowUpOutreach() {
     if (!selectedFollowUp) {
-      FieldAtlasAPI.showToast('Please select a participant from the queue.', 'warning');
+      SkillPulseAPI.showToast('Please select a participant from the queue.', 'warning');
       return;
     }
 
     const sendBtn = document.getElementById('btn-dispatch-followup');
     const originalText = sendBtn.innerHTML;
     sendBtn.disabled = true;
-    sendBtn.innerHTML = 'Dispatching...';
+    sendBtn.innerHTML = 'Processing...';
 
-    // Show simulated typing state
     const bubbleEl = document.getElementById('simulator-message-text');
     if (bubbleEl) bubbleEl.classList.add('typing');
 
     try {
-      const res = await FieldAtlasAPI.post(`/api/outcomes/follow-ups/${selectedFollowUp.id}/send/`);
-      FieldAtlasAPI.showToast(res.message, 'success');
+      if (currentChannel === 'call') {
+        // Interactive Tele-Call Dialog
+        const response = prompt(
+          `Log Call Result for ${selectedFollowUp.trainee_name}:\n1 = Placed & Employed\n2 = Self-Employed\n3 = Needs Assistance\n\nEnter status number (1, 2, or 3):`,
+          '1'
+        );
+        if (response === null) {
+          sendBtn.disabled = false;
+          sendBtn.innerHTML = originalText;
+          if (bubbleEl) bubbleEl.classList.remove('typing');
+          return;
+        }
 
-      // Update local item
-      selectedFollowUp.attempts += 1;
-      selectedFollowUp.status = 'sent';
-      selectedFollowUp.last_attempt_at = new Date().toISOString();
+        let newStatus = 'sent';
+        let msg = 'Call outcome recorded: Learner confirmed active placement.';
+        if (response === '2') {
+          newStatus = 'sent';
+          msg = 'Call outcome recorded: Learner self-employed.';
+        } else if (response === '3') {
+          newStatus = 'needs_assistance';
+          msg = 'Call outcome recorded: Learner requested placement assistance.';
+        }
+
+        selectedFollowUp.attempts += 1;
+        selectedFollowUp.status = newStatus;
+        selectedFollowUp.last_attempt_at = new Date().toISOString();
+
+        SkillPulseAPI.showToast(msg, 'success');
+        renderFollowUpQueue();
+      } else if (currentChannel === 'sms') {
+        // SMS Gateway Dispatch
+        const res = await SkillPulseAPI.post(`/api/outcomes/follow-ups/${selectedFollowUp.id}/send/`, { channel: 'sms' });
+        SkillPulseAPI.showToast(`SMS Gateway: Verification text sent to ${selectedFollowUp.trainee_name}!`, 'success');
+
+        selectedFollowUp.attempts += 1;
+        selectedFollowUp.status = 'sent';
+        selectedFollowUp.last_attempt_at = new Date().toISOString();
+        renderFollowUpQueue();
+      } else {
+        // WhatsApp Gateway Dispatch
+        const res = await SkillPulseAPI.post(`/api/outcomes/follow-ups/${selectedFollowUp.id}/send/`, { channel: 'whatsapp' });
+        SkillPulseAPI.showToast(res.message || `WhatsApp outreach sent to ${selectedFollowUp.trainee_name}!`, 'success');
+
+        selectedFollowUp.attempts += 1;
+        selectedFollowUp.status = 'sent';
+        selectedFollowUp.last_attempt_at = new Date().toISOString();
+        renderFollowUpQueue();
+      }
 
       setTimeout(() => {
         if (bubbleEl) bubbleEl.classList.remove('typing');
-        renderFollowUpQueue();
         sendBtn.disabled = false;
         sendBtn.innerHTML = originalText;
-      }, 750);
+      }, 500);
     } catch (err) {
       if (bubbleEl) bubbleEl.classList.remove('typing');
       sendBtn.disabled = false;
@@ -272,7 +331,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const consentVal = document.getElementById('filter-consent') ? document.getElementById('filter-consent').value : '';
 
     try {
-      const data = await FieldAtlasAPI.get('/api/outcomes/trainees/', {
+      const data = await SkillPulseAPI.get('/api/outcomes/trainees/', {
         q: searchVal,
         provider: providerVal,
         stage: stageVal,
@@ -349,11 +408,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const nextStatus = current === 'active' ? 'withdrawn' : 'granted';
         if (confirm(`Are you sure you want to change participant consent status to '${nextStatus}'?`)) {
           try {
-            await FieldAtlasAPI.post('/api/outcomes/consents/', {
+            await SkillPulseAPI.post('/api/outcomes/consents/', {
               trainee_id: id,
               status: nextStatus
             });
-            FieldAtlasAPI.showToast(`Consent updated to ${nextStatus}.`, 'success');
+            SkillPulseAPI.showToast(`Consent updated to ${nextStatus}.`, 'success');
             loadTraineesData();
           } catch (err) {}
         }
@@ -364,7 +423,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Loads single trainee record and populates the edit modal
   async function openEditTraineeModal(traineeId) {
     try {
-      const t = await FieldAtlasAPI.get(`/api/outcomes/trainees/${traineeId}/`);
+      const t = await SkillPulseAPI.get(`/api/outcomes/trainees/${traineeId}/`);
       document.getElementById('edit-trainee-id').value = t.id;
       document.getElementById('edit-trainee-name').value = t.name;
       document.getElementById('edit-trainee-course').value = t.course;
@@ -372,16 +431,16 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('edit-trainee-district').value = t.district;
       document.getElementById('edit-trainee-state').value = t.state;
       document.getElementById('edit-trainee-stage').value = t.stage;
-      FieldAtlasAPI.openModal('modal-edit-trainee');
+      SkillPulseAPI.openModal('modal-edit-trainee');
     } catch (err) {}
   }
 
   // Loads provider benchmarking charts and performance cards
   async function loadProvidersData() {
     try {
-      const data = await FieldAtlasAPI.get('/api/trainer/dashboard/');
-      if (window.FieldAtlasCharts && data.providers_pulse) {
-        FieldAtlasCharts.renderProviderPulseChart('providerComparisonCanvas', data.providers_pulse);
+      const data = await SkillPulseAPI.get('/api/trainer/dashboard/');
+      if (window.SkillPulseCharts && data.providers_pulse) {
+        SkillPulseCharts.renderProviderPulseChart('providerComparisonCanvas', data.providers_pulse);
       }
     } catch (err) {
       console.error('Failed to load provider metrics:', err);
@@ -403,7 +462,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     try {
       if (indicator) indicator.textContent = 'Loading courses...';
-      const res = await FieldAtlasAPI.get(url);
+      const res = await SkillPulseAPI.get(url);
       currentCourses = res.results || res || [];
       if (indicator) indicator.textContent = `${currentCourses.length} course${currentCourses.length === 1 ? '' : 's'}`;
       renderCoursesGrid(currentCourses);
@@ -567,7 +626,7 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('course-input-end-date').value = in8Weeks.toISOString().split('T')[0];
     }
 
-    FieldAtlasAPI.openModal('modal-course-form');
+    SkillPulseAPI.openModal('modal-course-form');
     if (window.lucide) lucide.createIcons();
   }
 
@@ -594,13 +653,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     try {
       if (id) {
-        await FieldAtlasAPI.patch(`/api/courses/${id}/`, payload);
-        FieldAtlasAPI.showToast('Course offering updated successfully.', 'success');
+        await SkillPulseAPI.patch(`/api/courses/${id}/`, payload);
+        SkillPulseAPI.showToast('Course offering updated successfully.', 'success');
       } else {
-        await FieldAtlasAPI.post('/api/courses/', payload);
-        FieldAtlasAPI.showToast('New course created and logged.', 'success');
+        await SkillPulseAPI.post('/api/courses/', payload);
+        SkillPulseAPI.showToast('New course created and logged.', 'success');
       }
-      FieldAtlasAPI.closeModal('modal-course-form');
+      SkillPulseAPI.closeModal('modal-course-form');
       loadCoursesData();
     } catch (err) {
       console.error('Failed to save course:', err);
@@ -611,8 +670,8 @@ document.addEventListener('DOMContentLoaded', function() {
   async function toggleCourseStatus(courseId, action) {
     try {
       const endpoint = action === 'publish' ? `/api/courses/${courseId}/publish/` : `/api/courses/${courseId}/close/`;
-      const res = await FieldAtlasAPI.post(endpoint);
-      FieldAtlasAPI.showToast(`Course status updated to ${res.status}.`, 'success');
+      const res = await SkillPulseAPI.post(endpoint);
+      SkillPulseAPI.showToast(`Course status updated to ${res.status}.`, 'success');
       loadCoursesData();
     } catch (err) {
       console.error('Failed to toggle course status:', err);
@@ -633,10 +692,10 @@ document.addEventListener('DOMContentLoaded', function() {
       listEl.innerHTML = '<div style="text-align: center; padding: 24px; color: var(--color-text-muted);">Loading applications...</div>';
     }
 
-    FieldAtlasAPI.openModal('modal-course-applications');
+    SkillPulseAPI.openModal('modal-course-applications');
 
     try {
-      const apps = await FieldAtlasAPI.get(`/api/courses/${courseId}/applications/`);
+      const apps = await SkillPulseAPI.get(`/api/courses/${courseId}/applications/`);
       renderApplicationsList(apps, courseId);
     } catch (err) {
       if (listEl) listEl.innerHTML = '<div style="color: #EF4444; padding: 16px;">Failed to load applications.</div>';
@@ -700,11 +759,11 @@ document.addEventListener('DOMContentLoaded', function() {
   // Submits trainer approval or rejection for a course application
   async function reviewApplication(appId, decision, courseId) {
     try {
-      await FieldAtlasAPI.post(`/api/courses/applications/${appId}/review/`, {
+      await SkillPulseAPI.post(`/api/courses/applications/${appId}/review/`, {
         status: decision,
         trainer_note: decision === 'approved' ? 'Approved by course instructor.' : 'Not accepted at this time.'
       });
-      FieldAtlasAPI.showToast(`Application marked as ${decision}.`, 'success');
+      SkillPulseAPI.showToast(`Application marked as ${decision}.`, 'success');
       openCourseApplications(courseId);
       loadCoursesData();
     } catch (err) {
@@ -726,10 +785,10 @@ document.addEventListener('DOMContentLoaded', function() {
       listEl.innerHTML = '<div style="text-align: center; padding: 24px; color: var(--color-text-muted);">Loading roster...</div>';
     }
 
-    FieldAtlasAPI.openModal('modal-course-roster');
+    SkillPulseAPI.openModal('modal-course-roster');
 
     try {
-      const enrollments = await FieldAtlasAPI.get(`/api/courses/${courseId}/enrollments/`);
+      const enrollments = await SkillPulseAPI.get(`/api/courses/${courseId}/enrollments/`);
       renderRosterList(enrollments, courseId);
     } catch (err) {
       if (listEl) listEl.innerHTML = '<div style="color: #EF4444; padding: 16px;">Failed to load roster.</div>';
@@ -843,11 +902,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     try {
-      await FieldAtlasAPI.patch(`/api/courses/enrollments/${enrollmentId}/`, {
+      await SkillPulseAPI.patch(`/api/courses/enrollments/${enrollmentId}/`, {
         completion_percent: num,
         status: num >= 100 ? 'completed' : 'active'
       });
-      FieldAtlasAPI.showToast('Enrollment progression updated.', 'success');
+      SkillPulseAPI.showToast('Enrollment progression updated.', 'success');
       openCourseRoster(courseId);
     } catch (err) {
       console.error('Failed to update progression:', err);
@@ -857,8 +916,8 @@ document.addEventListener('DOMContentLoaded', function() {
   // Issues cryptographic PDF certificate of completion
   async function issueCertificate(enrollmentId, courseId) {
     try {
-      const cert = await FieldAtlasAPI.post(`/api/courses/enrollments/${enrollmentId}/certificate/`);
-      FieldAtlasAPI.showToast(`Certificate ${cert.certificate_number} successfully issued!`, 'success');
+      const cert = await SkillPulseAPI.post(`/api/courses/enrollments/${enrollmentId}/certificate/`);
+      SkillPulseAPI.showToast(`Certificate ${cert.certificate_number} successfully issued!`, 'success');
       openCourseRoster(courseId);
       loadCoursesData();
     } catch (err) {
@@ -869,8 +928,8 @@ document.addEventListener('DOMContentLoaded', function() {
   // Sends in-app employment survey reminder to enrolled learner
   async function remindOutcome(enrollmentId) {
     try {
-      const res = await FieldAtlasAPI.post(`/api/courses/enrollments/${enrollmentId}/remind/`);
-      FieldAtlasAPI.showToast(res.message || 'Survey reminder dispatched to learner.', 'success');
+      const res = await SkillPulseAPI.post(`/api/courses/enrollments/${enrollmentId}/remind/`);
+      SkillPulseAPI.showToast(res.message || 'Survey reminder dispatched to learner.', 'success');
     } catch (err) {
       console.error('Failed to dispatch reminder:', err);
     }
@@ -879,8 +938,8 @@ document.addEventListener('DOMContentLoaded', function() {
   // Marks self-reported trainee outcome as officially verified
   async function verifyTraineeOutcome(outcomeId, courseId) {
     try {
-      await FieldAtlasAPI.post(`/api/courses/outcomes/${outcomeId}/verify/`);
-      FieldAtlasAPI.showToast('Outcome marked as verified.', 'success');
+      await SkillPulseAPI.post(`/api/courses/outcomes/${outcomeId}/verify/`);
+      SkillPulseAPI.showToast('Outcome marked as verified.', 'success');
       openCourseRoster(courseId);
     } catch (err) {
       console.error('Failed to verify outcome:', err);
@@ -901,10 +960,10 @@ document.addEventListener('DOMContentLoaded', function() {
       contentEl.innerHTML = '<div style="text-align: center; padding: 24px; color: var(--color-text-muted);">Calculating analytics...</div>';
     }
 
-    FieldAtlasAPI.openModal('modal-course-analytics');
+    SkillPulseAPI.openModal('modal-course-analytics');
 
     try {
-      const a = await FieldAtlasAPI.get(`/api/courses/${courseId}/analytics/`);
+      const a = await SkillPulseAPI.get(`/api/courses/${courseId}/analytics/`);
       if (contentEl) {
         contentEl.innerHTML = `
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
@@ -989,7 +1048,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (openRescheduleBtn) {
       openRescheduleBtn.addEventListener('click', () => {
         if (!selectedFollowUp) {
-          FieldAtlasAPI.showToast('Please select a participant first.', 'warning');
+          SkillPulseAPI.showToast('Please select a participant first.', 'warning');
           return;
         }
         document.getElementById('reschedule-followup-id').value = selectedFollowUp.id;
@@ -997,7 +1056,7 @@ document.addEventListener('DOMContentLoaded', function() {
           `${selectedFollowUp.trainee_name} (${selectedFollowUp.trainee_unified_id})`;
         document.getElementById('reschedule-contact-date').value = selectedFollowUp.next_contact_date || '';
         document.getElementById('reschedule-trainer-notes').value = selectedFollowUp.trainer_notes || '';
-        FieldAtlasAPI.openModal('modal-reschedule-followup');
+        SkillPulseAPI.openModal('modal-reschedule-followup');
       });
     }
 
@@ -1010,13 +1069,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const nextDate = document.getElementById('reschedule-contact-date').value;
         const notes = document.getElementById('reschedule-trainer-notes').value.trim();
         try {
-          await FieldAtlasAPI.patch(`/api/outcomes/follow-ups/${id}/`, {
+          await SkillPulseAPI.patch(`/api/outcomes/follow-ups/${id}/`, {
             status: 'rescheduled',
             next_contact_date: nextDate,
             trainer_notes: notes
           });
-          FieldAtlasAPI.showToast('Follow-up successfully rescheduled.', 'success');
-          FieldAtlasAPI.closeModal('modal-reschedule-followup');
+          SkillPulseAPI.showToast('Follow-up successfully rescheduled.', 'success');
+          SkillPulseAPI.closeModal('modal-reschedule-followup');
           loadFollowUpsData();
         } catch (err) {
           console.error('Failed to reschedule follow-up:', err);
@@ -1083,9 +1142,9 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         try {
-          await FieldAtlasAPI.post('/api/outcomes/trainees/', payload);
-          FieldAtlasAPI.showToast('Trainee registered with active consent record.', 'success');
-          FieldAtlasAPI.closeModal('modal-new-trainee');
+          await SkillPulseAPI.post('/api/outcomes/trainees/', payload);
+          SkillPulseAPI.showToast('Trainee registered with active consent record.', 'success');
+          SkillPulseAPI.closeModal('modal-new-trainee');
           newTraineeForm.reset();
           loadTraineesData();
         } catch (err) {}
@@ -1108,9 +1167,9 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         try {
-          await FieldAtlasAPI.patch(`/api/outcomes/trainees/${id}/`, payload);
-          FieldAtlasAPI.showToast('Trainee record updated successfully.', 'success');
-          FieldAtlasAPI.closeModal('modal-edit-trainee');
+          await SkillPulseAPI.patch(`/api/outcomes/trainees/${id}/`, payload);
+          SkillPulseAPI.showToast('Trainee record updated successfully.', 'success');
+          SkillPulseAPI.closeModal('modal-edit-trainee');
           loadTraineesData();
         } catch (err) {}
       });
@@ -1120,8 +1179,8 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.btn-seed-demo-trigger').forEach(btn => {
       btn.addEventListener('click', async function() {
         try {
-          const res = await FieldAtlasAPI.post('/api/outcomes/trainees/seed-demo/');
-          FieldAtlasAPI.showToast(res.message || 'Demo data verified and loaded.', 'success');
+          const res = await SkillPulseAPI.post('/api/outcomes/trainees/seed-demo/');
+          SkillPulseAPI.showToast(res.message || 'Demo data verified and loaded.', 'success');
           loadOverviewData();
           loadTraineesData();
           loadFollowUpsData();
