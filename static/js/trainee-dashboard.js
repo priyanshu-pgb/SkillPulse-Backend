@@ -713,6 +713,7 @@ document.addEventListener('DOMContentLoaded', function() {
       title: 'Cloud Native DevOps & Microservices',
       category: 'IT-ITeS & FutureSkills',
       scheme: 'PMKVY 4.0 / MeitY',
+      officialUrl: 'https://www.skillindiadigital.gov.in',
       icon: '☁️',
       color: '#0D7E55',
       matchScore: 98,
@@ -766,6 +767,7 @@ document.addEventListener('DOMContentLoaded', function() {
       title: 'AI & Data Intelligence with Python',
       category: 'Higher Education & Deep Tech',
       scheme: 'SWAYAM / NPTEL / IIT Madras',
+      officialUrl: 'https://swayam.gov.in',
       icon: '🧠',
       color: '#4F46E5',
       matchScore: 95,
@@ -819,6 +821,7 @@ document.addEventListener('DOMContentLoaded', function() {
       title: 'Cross-Platform Mobile App Development',
       category: 'IT-ITeS & FutureSkills',
       scheme: 'FutureSkills Prime / NASSCOM',
+      officialUrl: 'https://futureskillsprime.in',
       icon: '📱',
       color: '#0284C7',
       matchScore: 93,
@@ -872,6 +875,7 @@ document.addEventListener('DOMContentLoaded', function() {
       title: 'Cyber Defense & Network Security',
       category: 'Emerging Technologies',
       scheme: 'C-DAC / MeitY / ISEA',
+      officialUrl: 'https://www.cdac.in',
       icon: '🛡️',
       color: '#E11D48',
       matchScore: 89,
@@ -1053,12 +1057,13 @@ document.addEventListener('DOMContentLoaded', function() {
   // Selects an AI course and updates active view
   window.selectAICourse = function(courseKey) {
     renderAICourseData(courseKey);
-    const panel = document.getElementById('section-ai-advisor');
-    if (panel) {
-      panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Scroll directly to the 3-step analysis tabs (not the top of the section)
+    const anchor = document.getElementById('ai-step-tabs-anchor');
+    if (anchor) {
+      anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
     if (window.SkillPulseAPI && typeof SkillPulseAPI.showToast === 'function') {
-      SkillPulseAPI.showToast(`AI Analysis & Feasibility loaded for: ${aiCoursesDB[courseKey]?.title || courseKey}`, 'info');
+      SkillPulseAPI.showToast(`✅ Loaded: ${aiCoursesDB[courseKey]?.title || courseKey} — see 3-Step Analysis below`, 'success');
     }
   };
 
