@@ -3225,17 +3225,222 @@ html.dark .single-review-card .review-author-wrap div div {
 
 [data-theme="dark"] .criterion-pill,
 html.dark .criterion-pill {
+  background: rgba(11, 15, 25, 0.94) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .landing-brand-text,
+html.dark .landing-brand-text {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .landing-hero,
+html.dark .landing-hero {
+  background: linear-gradient(180deg, #0B0F19 0%, #0F172A 100%) !important;
+}
+
+[data-theme="dark"] .landing-hero h1,
+html.dark .landing-hero h1 {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .landing-hero p,
+html.dark .landing-hero p {
+  color: #CBD5E1 !important;
+}
+
+[data-theme="dark"] .features-section,
+html.dark .features-section {
+  background: #0B0F19 !important;
+}
+
+[data-theme="dark"] .section-header h2,
+html.dark .section-header h2 {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .section-header p,
+html.dark .section-header p {
+  color: #94A3B8 !important;
+}
+
+[data-theme="dark"] .feature-card,
+html.dark .feature-card {
+  background: #131B2E !important;
+  border: 1px solid #2A364F !important;
+}
+
+[data-theme="dark"] .feature-card h3,
+html.dark .feature-card h3 {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .feature-card p,
+html.dark .feature-card p {
+  color: #94A3B8 !important;
+}
+
+[data-theme="dark"] .how-section,
+html.dark .how-section {
+  background: #0E1526 !important;
+}
+
+[data-theme="dark"] .how-step h4,
+html.dark .how-step h4 {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .how-step p,
+html.dark .how-step p {
+  color: #94A3B8 !important;
+}
+
+[data-theme="dark"] .landing-footer,
+html.dark .landing-footer {
+  background: #080C14 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-theme="dark"] .landing-footer p,
+html.dark .landing-footer p {
+  color: #94A3B8 !important;
+}
+
+/* ─── Dark Mode Follow-Up Queue & Simulator ─── */
+[data-theme="dark"] .followup-queue-card,
+[data-theme="dark"] .simulator-card,
+html.dark .followup-queue-card,
+html.dark .simulator-card {
+  background: #131B2E !important;
+  border: 1px solid #2A364F !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-theme="dark"] .queue-header h3,
+html.dark .queue-header h3 {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .queue-item,
+html.dark .queue-item {
+  background: #1A2438 !important;
+  border: 1px solid #2A364F !important;
+}
+
+[data-theme="dark"] .queue-item:hover,
+html.dark .queue-item:hover {
+  background: #22304A !important;
+}
+
+[data-theme="dark"] .queue-item.selected,
+html.dark .queue-item.selected {
+  background: rgba(20, 184, 166, 0.15) !important;
+  border-color: #14B8A6 !important;
+}
+
+[data-theme="dark"] .queue-item strong,
+html.dark .queue-item strong {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .phone-preview-shell,
+html.dark .phone-preview-shell {
+  background: #0B0F19 !important;
+  border: 1px solid #2A364F !important;
+}
+
+[data-theme="dark"] .message-bubble,
+html.dark .message-bubble {
+  background: #1E293B !important;
+  color: #F8FAFC !important;
+  border: 1px solid #334155 !important;
+}
+
+[data-theme="dark"] .simulator-tab-btn,
+html.dark .simulator-tab-btn {
+  background: transparent !important;
+  color: #94A3B8 !important;
+  border: 1px solid #2A364F !important;
+}
+
+[data-theme="dark"] .simulator-tab-btn.active,
+html.dark .simulator-tab-btn.active {
+  background: #1E293B !important;
+  color: #38BDF8 !important;
+  border-color: #38BDF8 !important;
+}
+
+/* ─── Dark Mode Tables & Data Views ─── */
+[data-theme="dark"] .table-card,
+html.dark .table-card {
+  background: #131B2E !important;
+  border: 1px solid #2A364F !important;
+}
+
+[data-theme="dark"] .data-table,
+html.dark .data-table {
+  background: #131B2E !important;
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .data-table th,
+html.dark .data-table th {
+  background: #0E1526 !important;
+  color: #94A3B8 !important;
+}
+
+[data-theme="dark"] .data-table td,
+html.dark .data-table td {
+  border-bottom: 1px solid #1E293B !important;
+  color: #CBD5E1 !important;
+}
+
+[data-theme="dark"] .data-table td strong,
+html.dark .data-table td strong {
+  color: #F8FAFC !important;
+}
+
+/* ─── Dark Mode Feedback Reviews & Cards ─── */
+[data-theme="dark"] .single-review-card,
+html.dark .single-review-card {
+  background: #131B2E !important;
+  border: 1px solid #2A364F !important;
+}
+
+[data-theme="dark"] .single-review-card p,
+html.dark .single-review-card p {
+  color: #CBD5E1 !important;
+}
+
+[data-theme="dark"] .single-review-card .review-author-wrap div div,
+html.dark .single-review-card .review-author-wrap div div {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .criterion-pill,
+html.dark .criterion-pill {
   background: #1E293B !important;
   color: #94A3B8 !important;
   border: 1px solid #334155 !important;
 }
 
 /* Brand Logo Styling */
-.brand-logo-svg {
+.brand-logo-svg,
+.brand-logo-img {
   display: inline-block;
   vertical-align: middle;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(14, 129, 118, 0.3);
+  border-radius: 10px;
+  box-shadow: 0 3px 12px rgba(0, 43, 73, 0.22);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+}
+
+.brand-badge:hover .brand-logo-img,
+.brand-badge:hover .brand-logo-svg,
+.landing-brand:hover .brand-logo-img,
+.landing-brand:hover img {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 6px 18px rgba(13, 126, 85, 0.35);
 }
 
 
@@ -3589,6 +3794,265 @@ html.dark .sidh-brand-title {
   color: #F8FAFC !important;
 }
 
+/* ══════════════════════════════════════════════════════════════════
+   INFINITE MOVING MARQUEE (PARTNERS, FEATURES, MINISTRIES)
+   ══════════════════════════════════════════════════════════════════ */
+.sp-marquee-section {
+  width: 100%;
+  overflow: hidden;
+  padding: 1.5rem 0;
+  position: relative;
+}
+
+.sp-marquee-section.compact {
+  padding: 0.75rem 0;
+}
+
+.sp-marquee-header {
+  text-align: center;
+  margin-bottom: 1.25rem;
+  padding: 0 1rem;
+}
+
+.sp-marquee-header .sp-marquee-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  background: rgba(14, 129, 118, 0.1);
+  color: var(--color-teal);
+  border: 1px solid rgba(14, 129, 118, 0.2);
+  margin-bottom: 0.4rem;
+}
+
+.sp-marquee-header h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--color-deep-indigo);
+  margin: 0;
+}
+
+.sp-marquee-header p {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  margin: 0.25rem 0 0;
+}
+
+.sp-marquee-wrapper {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  display: flex;
+  mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+  user-select: none;
+}
+
+.sp-marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 1.15rem;
+  will-change: transform;
+  padding: 0.4rem 0;
+}
+
+.sp-marquee-track-left {
+  animation: spMarqueeScrollLeft 38s linear infinite;
+}
+
+.sp-marquee-track-right {
+  animation: spMarqueeScrollRight 42s linear infinite;
+}
+
+.sp-marquee-track-fast {
+  animation-duration: 28s;
+}
+
+.sp-marquee-track-slow {
+  animation-duration: 54s;
+}
+
+/* Pause smoothly on hover so user can easily read and click */
+.sp-marquee-wrapper:hover .sp-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes spMarqueeScrollLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes spMarqueeScrollRight {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Individual Card in Marquee - Ministry / Partner / Feature Card */
+.sp-partner-card,
+.sp-feature-marquee-card {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: var(--color-surface, #FFFFFF);
+  border: 1px solid var(--color-border, #E2E8F0);
+  border-radius: 12px;
+  padding: 0.7rem 1.15rem;
+  box-shadow: 0 2px 8px rgba(0, 43, 73, 0.04);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none !important;
+}
+
+.sp-partner-card:hover,
+.sp-feature-marquee-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-teal, #0E8176);
+  box-shadow: 0 6px 18px rgba(14, 129, 118, 0.14);
+}
+
+.sp-partner-card .partner-logo-box,
+.sp-feature-marquee-card .feature-icon-box {
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-weight: 800;
+  font-size: 1rem;
+  background: var(--color-parchment);
+}
+
+.sp-partner-card .partner-details,
+.sp-feature-marquee-card .feature-details {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.sp-partner-card .partner-name,
+.sp-feature-marquee-card .feature-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--color-deep-indigo);
+  letter-spacing: -0.01em;
+}
+
+.sp-partner-card .partner-sub,
+.sp-feature-marquee-card .feature-sub {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-top: 0.15rem;
+}
+
+.feature-badge-tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  margin-left: 0.4rem;
+  vertical-align: middle;
+}
+
+/* Embedded Ashoka Insignia for Ministry Cards */
+.sp-ministry-emblem {
+  height: 32px;
+  width: auto;
+}
+
+/* Trainee & Trainer Portal Specific Banner Overrides */
+.portal-feature-banner {
+  background: linear-gradient(180deg, rgba(14, 129, 118, 0.05) 0%, rgba(30, 39, 73, 0.02) 100%);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  padding: 0.85rem 0;
+  margin-bottom: 1.5rem;
+}
+
+.portal-feature-banner .sp-feature-marquee-card {
+  background: var(--color-surface);
+  border-radius: 10px;
+  padding: 0.55rem 0.95rem;
+}
+
+/* Dark Mode Overrides */
+[data-theme="dark"] .sp-partner-card,
+[data-theme="dark"] .sp-feature-marquee-card,
+html.dark .sp-partner-card,
+html.dark .sp-feature-marquee-card {
+  background: #131B2E !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-theme="dark"] .sp-partner-card:hover,
+[data-theme="dark"] .sp-feature-marquee-card:hover,
+html.dark .sp-partner-card:hover,
+html.dark .sp-feature-marquee-card:hover {
+  border-color: #14B8A6 !important;
+  box-shadow: 0 6px 20px rgba(20, 184, 166, 0.22) !important;
+}
+
+[data-theme="dark"] .sp-partner-card .partner-name,
+[data-theme="dark"] .sp-feature-marquee-card .feature-title,
+html.dark .sp-partner-card .partner-name,
+html.dark .sp-feature-marquee-card .feature-title {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .sp-marquee-header h3,
+html.dark .sp-marquee-header h3 {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .sp-partner-card .partner-sub,
+[data-theme="dark"] .sp-feature-marquee-card .feature-sub,
+html.dark .sp-partner-card .partner-sub,
+html.dark .sp-feature-marquee-card .feature-sub {
+  color: #94A3B8 !important;
+}
+
+[data-theme="dark"] .sp-partner-card .partner-logo-box,
+[data-theme="dark"] .sp-feature-marquee-card .feature-icon-box,
+html.dark .sp-partner-card .partner-logo-box,
+html.dark .sp-feature-marquee-card .feature-icon-box {
+  background: #1E293B !important;
+}
+
+[data-theme="dark"] .portal-feature-banner,
+html.dark .portal-feature-banner {
+  background: rgba(19, 27, 46, 0.7) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sp-marquee-track-left,
+  .sp-marquee-track-right {
+    animation: none !important;
+    overflow-x: auto;
+  }
+}
+
 /* ══════ AI-POWERED 3-STEP COURSE INTELLIGENCE STYLES ══════ */
 .ai-advisor-panel {
   background: var(--color-surface);
@@ -3793,4 +4257,6 @@ html.dark .ai-scheme-pill {
     width: calc(100% - 260px) !important;
   }
 }
+
+
 

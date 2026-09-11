@@ -87,6 +87,7 @@ urlpatterns = [
     path('api/trainee/govt-courses/', views_api.TraineeGovtCoursesAPIView.as_view(), name='api_trainee_govt_courses'),
     path('api/trainee/schemes/', views_api.TraineeSchemesAPIView.as_view(), name='api_trainee_schemes'),
     path('api/trainee/placement-submit/', views_api.TraineePlacementSubmitAPIView.as_view(), name='api_trainee_placement_submit'),
+    path('api/trainee/ai-recommendations/', views_api.TraineeAICourseRecommendationAPIView.as_view(), name='api_trainee_ai_recommendations'),
 
     # REST APIs: 4-Digit Phone SMS OTP
     path('api/auth/phone-sms-otp/', views_api.PhoneSMSOTPAPIView.as_view(), name='api_phone_sms_otp'),

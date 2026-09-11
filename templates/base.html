@@ -20,6 +20,13 @@
   <link rel="stylesheet" href="/static/css/field-atlas.css?v=2.6.0">
   <link rel="stylesheet" href="/static/css/responsive.css?v=2.6.0">
 
+  <!-- Favicon & Touch Icons -->
+  <link rel="icon" type="image/svg+xml" href="/static/images/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/images/apple-touch-icon.png">
+  <link rel="manifest" href="/static/site.webmanifest">
+
   {% block extra_css %}{% endblock %}
 </head>
 <body>
@@ -71,7 +78,10 @@
       <a href="https://digitalindia.gov.in" target="_blank" rel="noopener">Digital India</a>
     </div>
     <div class="gov-footer-disclaimer">
-      <p style="margin-bottom: 0.4rem; font-weight: 700; color: #CBD5E1;">कौशल विकास और उद्यमशीलता मंत्रालय | Ministry of Skill Development and Entrepreneurship (MSDE)</p>
+      <div style="display: inline-flex; align-items: center; justify-content: center; gap: 0.65rem; margin-bottom: 0.4rem;">
+        <img src="/static/images/skillpulse-icon.svg" alt="SkillPulse Logo" style="width: 26px; height: 26px; border-radius: 6px; vertical-align: middle;">
+        <span style="font-weight: 700; color: #CBD5E1; font-size: 0.95rem;">कौशल विकास और उद्यमशीलता मंत्रालय | Ministry of Skill Development and Entrepreneurship (MSDE)</span>
+      </div>
       <p style="margin: 0; font-size: 0.72rem; color: #94A3B8;">SkillPulse — Skilling Outcomes & Employment Analytics Portal. Designed and maintained in accordance with Guidelines for Indian Government Websites (GIGW) & Digital Personal Data Protection Act.</p>
     </div>
   </footer>

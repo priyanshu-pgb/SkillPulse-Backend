@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 64" fill="none" class="skillpulse-full-logo">
+  <defs>
+    <linearGradient id="fullBgGradD" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#001B30"/>
+      <stop offset="50%" stop-color="#002B49"/>
+      <stop offset="100%" stop-color="#021E36"/>
+    </linearGradient>
+
+    <linearGradient id="fullTealLoopD" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="40%" stop-color="#0D7E55"/>
+      <stop offset="100%" stop-color="#0369A1"/>
+    </linearGradient>
+
+    <linearGradient id="fullPulseArrowD" x1="0%" y1="100%" x2="90%" y2="10%">
+      <stop offset="0%" stop-color="#0284C7"/>
+      <stop offset="35%" stop-color="#06B6D4"/>
+      <stop offset="70%" stop-color="#38BDF8"/>
+      <stop offset="90%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#F26A21"/>
+    </linearGradient>
+
+    <linearGradient id="fullArrowHeadD" x1="20%" y1="90%" x2="95%" y2="10%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="50%" stop-color="#FBBF24"/>
+      <stop offset="100%" stop-color="#F26A21"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Left Icon Tile (48x48) -->
+  <g transform="translate(8, 8)">
+    <rect width="48" height="48" rx="12" fill="url(#fullBgGradD)"/>
+    <rect x="0.5" y="0.5" width="47" height="47" rx="11.5" stroke="rgba(255, 255, 255, 0.22)" stroke-width="1"/>
+    
+    <!-- Scaled Icon Glyphs (scale 48/120 = 0.4) -->
+    <g transform="scale(0.4)">
+      <path d="M 66 33 C 66 26.5 58.5 22 47 22 C 34 22 25.5 29.5 25.5 40.5 C 25.5 50.5 33.5 56.5 49 61 C 65 65.5 73.5 72.5 73.5 83.5 C 73.5 94.5 64 100 48.5 100 C 35 100 27.5 92.5 27.5 85" 
+            stroke="url(#fullTealLoopD)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <path d="M 44 48 L 44 96" 
+            stroke="url(#fullTealLoopD)" stroke-width="10" stroke-linecap="round" fill="none"/>
+      <path d="M 44 48 C 58 48 72 54 72 68 C 72 81 58 87 44 87" 
+            stroke="url(#fullTealLoopD)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+      <!-- Pulse & Arrow -->
+      <path d="M 33 76 L 47 53 L 57 67 L 76 36 L 93 23" 
+            stroke="url(#fullPulseArrowD)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <path d="M 35 75 L 47 55 L 57 66 L 76 37 L 91 25" 
+            stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.9"/>
+      <polygon points="97,14 80,24 88,29" fill="url(#fullArrowHeadD)"/>
+      <polygon points="97,14 88,29 93,37" fill="url(#fullArrowHeadD)"/>
+      <circle cx="97" cy="14" r="3.5" fill="#FDE047"/>
+      <circle cx="97" cy="14" r="1.8" fill="#FFFFFF"/>
+    </g>
+  </g>
+
+  <!-- Typography Right (For Dark Theme: Crisp White + Cyan Accent) -->
+  <text x="68" y="34" font-family="'Outfit', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="24" font-weight="800" fill="#FFFFFF" letter-spacing="-0.5">Skill<tspan fill="#38BDF8">Pulse</tspan></text>
+  <text x="69" y="49" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="8.5" font-weight="700" fill="#F26A21" letter-spacing="1.2">SKILLING OUTCOMES INTELLIGENCE</text>
+</svg>
