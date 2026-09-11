@@ -703,4 +703,405 @@ document.addEventListener('DOMContentLoaded', function() {
       loadBrowseCourses();
     });
   });
+
+  // ════════════════════════════════════════════════════════════
+  // AI-POWERED 3-STEP COURSE INTELLIGENCE ENGINE (PICTORIAL)
+  // ════════════════════════════════════════════════════════════
+  const aiCoursesDB = {
+    'cloud-devops': {
+      id: 'cloud-devops',
+      title: 'Cloud Native DevOps & Microservices',
+      category: 'IT-ITeS & FutureSkills',
+      scheme: 'PMKVY 4.0 / MeitY',
+      icon: '☁️',
+      color: '#0D7E55',
+      matchScore: 98,
+      matchReason: 'Seamlessly builds upon your Full Stack Web Development foundation with cloud infrastructure skills.',
+      avgSalary: '₹38,000 / month',
+      hiringDemand: '96/100 · High Surge 🔥',
+      openings: '2,840+ Active Vacancies',
+      growthRate: '+34% YoY Growth',
+      feasibilityScore: 94,
+      feasibilityText: 'Optimal match with zero study conflicts. Fits comfortably alongside current projects.',
+      weeklyHours: '6 Hours / Week',
+      durationWeeks: '8 Weeks',
+      completionProb: '96.4%',
+      dropoutRisk: '3.6% (Minimal)',
+      roiSalaryUplift: '+90% WAGE GROWTH',
+      accreditation: 'Accreditation: PMKVY 4.0 / NCVET Level 6 Standard',
+      analysis: {
+        demandScore: 96,
+        skills: [
+          { name: 'Containerization & Docker', level: 95, icon: 'box' },
+          { name: 'Kubernetes Cluster Orchestration', level: 90, icon: 'server' },
+          { name: 'CI/CD Pipelines (GitHub Actions)', level: 94, icon: 'git-branch' },
+          { name: 'AWS Cloud Architecture & IAM', level: 88, icon: 'cloud' },
+          { name: 'Prometheus & Grafana Observability', level: 86, icon: 'activity' }
+        ],
+        milestones: [
+          { step: '01', title: 'Containerization', desc: 'Dockerizing modern web apps' },
+          { step: '02', title: 'K8s Orchestration', desc: 'Cluster networking & storage' },
+          { step: '03', title: 'Automated CI/CD', desc: 'Continuous testing & deployment' },
+          { step: '04', title: 'Live Capstone', desc: 'Production verification on AWS' }
+        ],
+        techStack: ['Docker', 'Kubernetes', 'AWS', 'Python', 'GitHub Actions', 'Prometheus', 'Linux']
+      },
+      feasibility: {
+        prerequisites: [
+          { label: 'Web & Programming Logic', ready: 95, status: 'Mastered' },
+          { label: 'Command Line & Linux Basics', ready: 88, status: 'Ready' },
+          { label: 'Database & Networking Core', ready: 90, status: 'Mastered' },
+          { label: 'Cloud IAM & Security Principles', ready: 78, status: 'Bridged in Wk 1' }
+        ],
+        effortPercent: 32,
+        projectedSalary: '₹38,000 / mo',
+        salaryUpliftPct: '+90% Wage Growth',
+        placementRate: '92%',
+        duration: '8 Wks'
+      },
+      applyMotivation: 'I have successfully completed my Full Stack Web Development foundational modules and wish to specialize in Cloud Native DevOps to design resilient microservices pipelines.'
+    },
+    'ai-data': {
+      id: 'ai-data',
+      title: 'AI & Data Intelligence with Python',
+      category: 'Higher Education & Deep Tech',
+      scheme: 'SWAYAM / NPTEL / IIT Madras',
+      icon: '🧠',
+      color: '#4F46E5',
+      matchScore: 95,
+      matchReason: 'Leverages your JavaScript & logical skills to master predictive AI and machine learning workflows.',
+      avgSalary: '₹42,000 / month',
+      hiringDemand: '98/100 · Explosive Surge 🔥',
+      openings: '3,450+ Active Vacancies',
+      growthRate: '+46% YoY Growth',
+      feasibilityScore: 91,
+      feasibilityText: 'Highly feasible with progressive math & Python fundamentals integrated into the first 2 weeks.',
+      weeklyHours: '7 Hours / Week',
+      durationWeeks: '10 Weeks',
+      completionProb: '94.2%',
+      dropoutRisk: '5.8% (Low)',
+      roiSalaryUplift: '+110% WAGE GROWTH',
+      accreditation: 'Accreditation: SWAYAM / NPTEL Verified Credential',
+      analysis: {
+        demandScore: 98,
+        skills: [
+          { name: 'Python Data Science & Pandas', level: 96, icon: 'code' },
+          { name: 'Machine Learning Models (Scikit-Learn)', level: 92, icon: 'cpu' },
+          { name: 'Neural Networks & Deep Learning', level: 85, icon: 'network' },
+          { name: 'Data Visualization & BI Dashboards', level: 94, icon: 'bar-chart-2' },
+          { name: 'Prompt Engineering & LLM APIs', level: 90, icon: 'sparkles' }
+        ],
+        milestones: [
+          { step: '01', title: 'Data Wrangling', desc: 'Exploratory data analysis & cleanup' },
+          { step: '02', title: 'Predictive ML', desc: 'Regression & classification models' },
+          { step: '03', title: 'Deep Learning & LLMs', desc: 'Generative AI & API fine-tuning' },
+          { step: '04', title: 'Industry Capstone', desc: 'Predictive analytics pipeline' }
+        ],
+        techStack: ['Python', 'Pandas', 'NumPy', 'Scikit-Learn', 'TensorFlow', 'PostgreSQL', 'Streamlit']
+      },
+      feasibility: {
+        prerequisites: [
+          { label: 'Python & Syntax Logic', ready: 92, status: 'Ready' },
+          { label: 'Linear Algebra & Statistics', ready: 80, status: 'Refresher Included' },
+          { label: 'Data Structures & Algorithms', ready: 86, status: 'Ready' },
+          { label: 'SQL Querying Foundations', ready: 94, status: 'Mastered' }
+        ],
+        effortPercent: 38,
+        projectedSalary: '₹42,000 / mo',
+        salaryUpliftPct: '+110% Wage Growth',
+        placementRate: '94%',
+        duration: '10 Wks'
+      },
+      applyMotivation: 'I want to advance my development career into Artificial Intelligence and Data Science to build data-driven intelligent applications.'
+    },
+    'mobile-react': {
+      id: 'mobile-react',
+      title: 'Cross-Platform Mobile App Development',
+      category: 'IT-ITeS & FutureSkills',
+      scheme: 'FutureSkills Prime / NASSCOM',
+      icon: '📱',
+      color: '#0284C7',
+      matchScore: 93,
+      matchReason: 'Direct 1-to-1 transfer of your existing JavaScript and CSS skills into iOS and Android apps.',
+      avgSalary: '₹34,000 / month',
+      hiringDemand: '91/100 · High Demand 🔥',
+      openings: '2,120+ Active Vacancies',
+      growthRate: '+24% YoY Growth',
+      feasibilityScore: 97,
+      feasibilityText: 'Maximum feasibility! Reuses 85% of your existing Web Development knowledge base.',
+      weeklyHours: '5 Hours / Week',
+      durationWeeks: '6 Weeks',
+      completionProb: '98.1%',
+      dropoutRisk: '1.9% (Minimal)',
+      roiSalaryUplift: '+70% WAGE GROWTH',
+      accreditation: 'Accreditation: FutureSkills Prime / NASSCOM Gold Standard',
+      analysis: {
+        demandScore: 91,
+        skills: [
+          { name: 'React Native Architecture', level: 96, icon: 'smartphone' },
+          { name: 'State Management (Redux/Zustand)', level: 92, icon: 'layers' },
+          { name: 'Native Device APIs (Camera, GPS)', level: 88, icon: 'map-pin' },
+          { name: 'Offline Storage & SQLite', level: 85, icon: 'database' },
+          { name: 'App Store & Play Store Deploy', level: 90, icon: 'upload-cloud' }
+        ],
+        milestones: [
+          { step: '01', title: 'React Native Core', desc: 'Components & navigation layout' },
+          { step: '02', title: 'Device Hardware APIs', desc: 'Camera, geolocation & sensors' },
+          { step: '03', title: 'Offline-First Apps', desc: 'SQLite & local synchronization' },
+          { step: '04', title: 'App Store Deploy', desc: 'Building release bundles' }
+        ],
+        techStack: ['React Native', 'Expo', 'TypeScript', 'Redux', 'REST APIs', 'Firebase', 'Tailwind']
+      },
+      feasibility: {
+        prerequisites: [
+          { label: 'JavaScript ES6+ Core', ready: 98, status: 'Mastered' },
+          { label: 'CSS Flexbox & Layouts', ready: 95, status: 'Mastered' },
+          { label: 'REST API Consumption', ready: 96, status: 'Mastered' },
+          { label: 'Mobile UI/UX Conventions', ready: 82, status: 'Ready' }
+        ],
+        effortPercent: 26,
+        projectedSalary: '₹34,000 / mo',
+        salaryUpliftPct: '+70% Wage Growth',
+        placementRate: '90%',
+        duration: '6 Wks'
+      },
+      applyMotivation: 'I am eager to translate my frontend web development proficiency into building responsive cross-platform iOS and Android mobile solutions.'
+    },
+    'cyber-defense': {
+      id: 'cyber-defense',
+      title: 'Cyber Defense & Network Security',
+      category: 'Emerging Technologies',
+      scheme: 'C-DAC / MeitY / ISEA',
+      icon: '🛡️',
+      color: '#E11D48',
+      matchScore: 89,
+      matchReason: 'Adds mission-critical security auditing and defense capabilities to your development profile.',
+      avgSalary: '₹45,000 / month',
+      hiringDemand: '97/100 · Critical National Demand 🛡️',
+      openings: '3,100+ Active Vacancies',
+      growthRate: '+38% YoY Growth',
+      feasibilityScore: 88,
+      feasibilityText: 'Requires dedicated weekly hands-on laboratory exercises with virtual sandbox environments.',
+      weeklyHours: '8 Hours / Week',
+      durationWeeks: '12 Weeks',
+      completionProb: '91.5%',
+      dropoutRisk: '8.5% (Moderate Challenge)',
+      roiSalaryUplift: '+125% WAGE GROWTH',
+      accreditation: 'Accreditation: C-DAC / MeitY Government Certified',
+      analysis: {
+        demandScore: 97,
+        skills: [
+          { name: 'Ethical Hacking & Penetration Testing', level: 92, icon: 'shield-alert' },
+          { name: 'OWASP Top 10 Web Defense', level: 96, icon: 'lock' },
+          { name: 'Network Traffic Analysis (Wireshark)', level: 88, icon: 'activity' },
+          { name: 'Cloud Security Compliance & IAM', level: 86, icon: 'cloud-rain' },
+          { name: 'Incident Response & Forensics', level: 84, icon: 'file-search' }
+        ],
+        milestones: [
+          { step: '01', title: 'Network Defense Core', desc: 'Firewalls, VPNs & packet sniffing' },
+          { step: '02', title: 'App Security Audits', desc: 'Identifying & patching web flaws' },
+          { step: '03', title: 'Cloud Threat Defense', desc: 'Hardening cloud assets & IAM' },
+          { step: '04', title: 'Red/Blue Team CTF', desc: 'Simulated cyber defense drills' }
+        ],
+        techStack: ['Kali Linux', 'Wireshark', 'Burp Suite', 'Metasploit', 'Python', 'Nmap', 'Suricata']
+      },
+      feasibility: {
+        prerequisites: [
+          { label: 'Web Protocols (HTTP/HTTPS)', ready: 95, status: 'Mastered' },
+          { label: 'Linux OS Foundations', ready: 82, status: 'Ready' },
+          { label: 'TCP/IP & OSI Model', ready: 80, status: 'Refresher Included' },
+          { label: 'Scripting & Automation', ready: 88, status: 'Ready' }
+        ],
+        effortPercent: 44,
+        projectedSalary: '₹45,000 / mo',
+        salaryUpliftPct: '+125% Wage Growth',
+        placementRate: '95%',
+        duration: '12 Wks'
+      },
+      applyMotivation: 'I wish to build upon my application development foundation with specialized cyber defense and application security audit expertise.'
+    }
+  };
+
+  // Renders complete pictorial data for the selected course across all 3 steps
+  function renderAICourseData(courseKey) {
+    const c = aiCoursesDB[courseKey] || aiCoursesDB['cloud-devops'];
+
+    // Update dropdown selector
+    const selector = document.getElementById('ai-course-selector');
+    if (selector && selector.value !== c.id) {
+      selector.value = c.id;
+    }
+
+    // Highlight active card in marquee
+    const marqueeCards = document.querySelectorAll('.ai-course-marquee-card');
+    marqueeCards.forEach(card => {
+      if (card.getAttribute('data-course-id') === c.id) {
+        card.classList.add('selected');
+      } else {
+        card.classList.remove('selected');
+      }
+    });
+
+    // ─── STEP 1: COURSE ANALYSIS ───
+    const demandScoreEl = document.getElementById('ai-analysis-demand-score');
+    if (demandScoreEl) demandScoreEl.textContent = c.analysis.demandScore;
+
+    const demandCircle = document.getElementById('ai-demand-gauge-circle');
+    if (demandCircle) {
+      const offset = 251.2 * (1 - c.analysis.demandScore / 100);
+      demandCircle.style.strokeDashoffset = offset;
+    }
+
+    const openingsEl = document.getElementById('ai-analysis-openings');
+    if (openingsEl) openingsEl.textContent = c.openings;
+
+    const growthEl = document.getElementById('ai-analysis-growth');
+    if (growthEl) growthEl.textContent = c.growthRate;
+
+    const accreditationEl = document.getElementById('ai-analysis-accreditation');
+    if (accreditationEl) accreditationEl.textContent = c.accreditation;
+
+    // Skills radar bars
+    const skillsContainer = document.getElementById('ai-analysis-skills-container');
+    if (skillsContainer) {
+      skillsContainer.innerHTML = c.analysis.skills.map(s => `
+        <div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 0.2rem;">
+            <span style="font-weight: 600; color: var(--color-deep-indigo);">${s.name}</span>
+            <strong style="color: var(--color-teal);">${s.level}%</strong>
+          </div>
+          <div class="progress-bar-bg" style="height: 6px;">
+            <div class="progress-bar-fill" style="width: ${s.level}%; background: linear-gradient(90deg, #0D7E55, #10B981);"></div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Milestones
+    const milestonesContainer = document.getElementById('ai-analysis-milestones-container');
+    if (milestonesContainer) {
+      milestonesContainer.innerHTML = c.analysis.milestones.map(m => `
+        <div style="background: rgba(0,43,73,0.03); border: 1px solid var(--color-border); border-radius: 8px; padding: 0.65rem 0.75rem;">
+          <span style="font-size: 0.68rem; font-weight: 800; color: #F26A21; text-transform: uppercase;">STAGE ${m.step}</span>
+          <div style="font-weight: 700; font-size: 0.82rem; color: var(--color-deep-indigo); margin: 0.15rem 0;">${m.title}</div>
+          <div style="font-size: 0.7rem; color: var(--color-text-muted); line-height: 1.3;">${m.desc}</div>
+        </div>
+      `).join('');
+    }
+
+    // Tech Badges
+    const techBadgesContainer = document.getElementById('ai-analysis-tech-badges');
+    if (techBadgesContainer) {
+      techBadgesContainer.innerHTML = c.analysis.techStack.map(t => `
+        <span style="background: var(--color-surface); border: 1px solid var(--color-border); padding: 0.2rem 0.55rem; border-radius: 6px; font-size: 0.72rem; font-weight: 700; color: var(--color-text-secondary);">${t}</span>
+      `).join('');
+    }
+
+    // ─── STEP 2: COURSE FEASIBILITY ───
+    const feasScoreEl = document.getElementById('ai-feasibility-score-val');
+    if (feasScoreEl) feasScoreEl.textContent = c.feasibilityScore + '%';
+
+    const feasCircle = document.getElementById('ai-feasibility-gauge-circle');
+    if (feasCircle) {
+      const offset = 251.2 * (1 - c.feasibilityScore / 100);
+      feasCircle.style.strokeDashoffset = offset;
+    }
+
+    const feasVerdictEl = document.getElementById('ai-feasibility-verdict');
+    if (feasVerdictEl) feasVerdictEl.textContent = c.feasibilityText;
+
+    const compProbEl = document.getElementById('ai-completion-prob');
+    if (compProbEl) compProbEl.textContent = c.completionProb;
+
+    const dropRiskEl = document.getElementById('ai-dropout-risk');
+    if (dropRiskEl) dropRiskEl.textContent = c.dropoutRisk;
+
+    const effortHoursEl = document.getElementById('ai-effort-hours');
+    if (effortHoursEl) effortHoursEl.textContent = c.weeklyHours;
+
+    // Prerequisites Matrix
+    const prereqsContainer = document.getElementById('ai-prerequisites-container');
+    if (prereqsContainer) {
+      prereqsContainer.innerHTML = c.feasibility.prerequisites.map(p => `
+        <div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 0.2rem;">
+            <span style="font-weight: 600; color: var(--color-deep-indigo);">${p.label}</span>
+            <span style="font-size: 0.7rem; font-weight: 700; color: ${p.ready >= 90 ? '#15803D' : '#0369A1'};">${p.status} (${p.ready}%)</span>
+          </div>
+          <div class="progress-bar-bg" style="height: 6px;">
+            <div class="progress-bar-fill" style="width: ${p.ready}%; background: ${p.ready >= 90 ? 'linear-gradient(90deg, #10B981, #059669)' : 'linear-gradient(90deg, #0284C7, #06B6D4)'};"></div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    const roiBadge = document.getElementById('ai-roi-badge');
+    if (roiBadge) roiBadge.textContent = c.roiSalaryUplift;
+
+    const projSalaryText = document.getElementById('ai-projected-salary-text');
+    if (projSalaryText) projSalaryText.textContent = c.feasibility.projectedSalary;
+
+    const placementRateEl = document.getElementById('ai-placement-rate');
+    if (placementRateEl) placementRateEl.textContent = c.feasibility.placementRate;
+
+    const durationTextEl = document.getElementById('ai-duration-text');
+    if (durationTextEl) durationTextEl.textContent = c.feasibility.duration;
+
+    if (window.lucide) lucide.createIcons();
+  }
+
+  // Selects an AI course and updates active view
+  window.selectAICourse = function(courseKey) {
+    renderAICourseData(courseKey);
+    const panel = document.getElementById('section-ai-advisor');
+    if (panel) {
+      panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    if (window.SkillPulseAPI && typeof SkillPulseAPI.showToast === 'function') {
+      SkillPulseAPI.showToast(`AI Analysis & Feasibility loaded for: ${aiCoursesDB[courseKey]?.title || courseKey}`, 'info');
+    }
+  };
+
+  // Switches between Step 1, Step 2, and Step 3 tabs
+  window.switchAIStep = function(stepNum) {
+    [1, 2, 3].forEach(num => {
+      const tab = document.getElementById(`tab-ai-step-${num}`);
+      const content = document.getElementById(`ai-step-content-${num}`);
+      if (tab && content) {
+        if (num === stepNum) {
+          tab.classList.add('active');
+          content.style.display = 'block';
+        } else {
+          tab.classList.remove('active');
+          content.style.display = 'none';
+        }
+      }
+    });
+    if (window.lucide) lucide.createIcons();
+  };
+
+  // 1-Click Apply from AI Advisor with pre-filled motivation
+  window.applyAICourse = function(courseKey) {
+    const c = aiCoursesDB[courseKey] || aiCoursesDB['cloud-devops'];
+    const modal = document.getElementById('modal-apply-course');
+    const titleEl = document.getElementById('apply-modal-course-title');
+    const motivationEl = document.getElementById('apply-motivation');
+
+    if (modal && titleEl && motivationEl) {
+      titleEl.textContent = `${c.title} (${c.scheme})`;
+      motivationEl.value = c.applyMotivation;
+      if (window.SkillPulseAPI && typeof SkillPulseAPI.openModal === 'function') {
+        SkillPulseAPI.openModal('modal-apply-course');
+        SkillPulseAPI.showToast(`✨ Pre-filled application with AI-generated motivation for ${c.title}!`, 'success');
+      } else {
+        modal.classList.add('active');
+      }
+    }
+  };
+
+  // Initial render of AI Advisor default view
+  setTimeout(() => {
+    renderAICourseData('cloud-devops');
+  }, 100);
 });
+
